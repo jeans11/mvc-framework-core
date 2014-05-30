@@ -1,0 +1,16 @@
+{
+    "name": "petty/framework",
+    "description": "This is petty",
+    "keywords": ["framework", "petty"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jean Boudet",
+            "email": "jean.boudet11@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+	}
+}
+ 
