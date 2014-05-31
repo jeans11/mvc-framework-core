@@ -19,7 +19,7 @@ class Container extends ReflectionClass implements ArrayAccess
 	 * @param string $key
 	 * @return bool
 	 */
-	protected function offsetExists($key)
+	public function offsetExists($key)
 	{
 		return isset($this->contains[$key]);
 	}
@@ -30,7 +30,7 @@ class Container extends ReflectionClass implements ArrayAccess
 	 * @param string $key
 	 * @return mixed
 	 */
-	protected function offsetGet($key)
+	public function offsetGet($key)
 	{
 		return $this->make($key);
 	}
@@ -42,7 +42,7 @@ class Container extends ReflectionClass implements ArrayAccess
 	 * @param mixed $value
 	 * @return void
 	 */
-	protected function offsetSet($key, $value)
+	public function offsetSet($key, $value)
 	{
 
 	}
