@@ -4,7 +4,7 @@ namespace Core\Container;
 use ArrayAccess;
 use ReflectionClass;
 
-class Container extends ReflectionClass implements ArrayAccess
+class Container implements ArrayAccess
 {
 	/**
 	 * Contiens les services
