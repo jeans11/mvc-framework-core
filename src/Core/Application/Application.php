@@ -2,7 +2,7 @@
 
 namespace Core\Application;
 
-use Container;
+use Core\Container\Container;
 
 class Application extends Container
 {
