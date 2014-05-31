@@ -46,4 +46,15 @@ class Container extends ReflectionClass implements ArrayAccess
 	{
 
 	}
+
+	/**
+	 * Supprime une entrée
+	 *
+	 * @param string $key
+	 * @return void
+	 */
+	public function offsetUnset($key)
+	{
+		unset($this->contains[$key]);
+	}
 }
