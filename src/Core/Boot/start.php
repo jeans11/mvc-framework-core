@@ -1,3 +1,6 @@
 <?php
 
-echo 'salut';
+/**
+ * Ajoute certains services au container
+ */
+$app->addToContains();

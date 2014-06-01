@@ -1,5 +1,4 @@
 <?php
-
 namespace Core\Application;
 
 use Core\Container\Container;
@@ -14,7 +13,8 @@ class Application extends Container
 	public function addToContains()
 	{
 		$services = array(
-			'app' => 'Core\Application\Application'
+			'app' => 'Core\Application\Application',
+			'toto' => 'test'
 		);
 
 		foreach ($services as $key => $value) {
