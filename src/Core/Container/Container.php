@@ -7,11 +7,30 @@ use ReflectionClass;
 class Container implements ArrayAccess
 {
 	/**
-	 * Contiens les services
+	 * Contiens les noms de classes
 	 *
 	 * @var array
 	 */
-	protected $contains = array();
+	protected $classNames = array();
+	
+	/**
+	 * Contient les instances
+	 *
+	 * @var array
+	 */
+	protected $contains = array();	
+
+	/**
+	 * Retourne la valeur en fonction
+	 * de la clé fournis
+	 *
+	 * @param string $key
+	 * @return mixed
+	 */
+	protected function make($key)
+	{
+		return $this->contains[$key];
+	}
 
 	/**
 	 * Vérifie si la clé existe

@@ -3,4 +3,13 @@
 /**
  * Ajoute certains services au container
  */
-$app->addToContains();
+$app->addToClassNames();
+
+/**
+ * Résout les dépendances
+ */
+
+//$app->solvesDependencies();
+
+
+

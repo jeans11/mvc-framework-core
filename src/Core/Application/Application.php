@@ -10,16 +10,33 @@ class Application extends Container
 	 * 
 	 * @return void
 	 */
-	public function addToContains()
+	public function addToClassNames()
 	{
-		$services = array(
+		$classes = array(
 			'app' => 'Core\Application\Application',
-			'toto' => 'test'
+			'config' => 'Core\Config\Config'
 		);
 
 		foreach ($services as $key => $value) {
-			$this->contains[$key] = $value;
+			$this->classNames[$key] = $value;
 		}
+	}
+
+	/**
+	 * Ajoute les chemin au container
+	 *
+	 * @return void
+	 */
+	public function installPath(array $paths)
+	{
+		foreach	($paths as $key => $path) {
+			$this->contains['path.'.$key] = realpath($path);
+		}
+	}
+
+	public function solvesDependencies()
+	{
+				
 	}
 
 }
