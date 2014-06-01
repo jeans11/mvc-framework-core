@@ -13,6 +13,11 @@ class Container implements ArrayAccess
 	 */
 	protected $contains = array();
 
+	protected function make($key)
+	{
+		return $this->contains[$key];
+	}
+
 	/**
 	 * Vérifie si la clé existe
 	 *
