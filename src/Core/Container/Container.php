@@ -32,6 +32,11 @@ class Container implements ArrayAccess
 		return $this->contains[$key];
 	}
 
+	protected function register(array $providers)
+	{
+		echo 'test';
+	}
+
 	/**
 	 * Vérifie si la clé existe
 	 *

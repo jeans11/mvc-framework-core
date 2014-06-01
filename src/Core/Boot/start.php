@@ -8,8 +8,7 @@ $app->addToClassNames();
 /**
  * Résout les dépendances
  */
-
-//$app->solvesDependencies();
+$app->solvesDependencies();
 
 
 

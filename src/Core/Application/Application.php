@@ -17,7 +17,7 @@ class Application extends Container
 			'config' => 'Core\Config\Config'
 		);
 
-		foreach ($services as $key => $value) {
+		foreach ($classes as $key => $value) {
 			$this->classNames[$key] = $value;
 		}
 	}
@@ -36,7 +36,11 @@ class Application extends Container
 
 	public function solvesDependencies()
 	{
+		if (file_exists($this['path.config'].'/providers.php'))	{
 				
+		}
+
+		$this->register(require __DIR__.'/../Config/providers.php');
 	}
 
 }
