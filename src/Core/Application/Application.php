@@ -36,11 +36,11 @@ class Application extends Container
 
 	public function solvesDependencies()
 	{
-		if (file_exists($this['path.config'].'/providers.php'))	{
+		if (file_exists($this['path.config'].'/providers.json'))	{
 				
 		}
 
-		$this->register(require __DIR__.'/../Config/providers.php');
+		$this->register(json_decode(file_get_contents(__DIR__.'/../Config/providers.json'), true));
 	}
 
 }
