@@ -34,7 +34,31 @@ class Container implements ArrayAccess
 
 	protected function register(array $providers)
 	{
-		echo 'test';
+		foreach ($providers as $key => $value) {
+			switch ($value) {
+				case empty($value):
+					$className = $this->classNames[$key];
+					$params = null;
+					break;
+				case is_string($value):
+					break;
+				case is_array($value):
+					break;
+			}
+
+			$this->build($key, $params);
+		}
+	}
+
+	private function build(string $className, $params = null) {
+		
+		$this->instances[$key] = function() use ($className) {
+			return new $className();	
+		}
+	}
+
+	private function getParams(array $params) {
+			
 	}
 
 	/**
