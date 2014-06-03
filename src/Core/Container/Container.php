@@ -37,28 +37,31 @@ class Container implements ArrayAccess
 		foreach ($providers as $key => $value) {
 			switch ($value) {
 				case empty($value):
-					$className = $this->classNames[$key];
-					$params = null;
+					$param = null;
 					break;
 				case is_string($value):
+					$param = $this->getParam[$value];
 					break;
 				case is_array($value):
 					break;
 			}
 
-			$this->build($key, $params);
+			$className = $this->classNames[$key];
+			$this->build($className, $param);
 		}
 	}
 
-	private function build(string $className, $params = null) {
+	private function build(string $className, $param = null) {
 		
-		$this->instances[$key] = function() use ($className) {
-			return new $className();	
+		$this->instances[$key] = function() use ($className, $param) {
+			return new $className($param);	
 		}
 	}
 
-	private function getParams(array $params) {
-			
+	private function getParam(string $param) {
+		if (array_key_exists($param, $this->instances))	{
+			return $this->instances[$param];
+		}
 	}
 
 	/**
