@@ -2,6 +2,7 @@
 namespace Core\Container;
 
 use ArrayAccess;
+use Closure;
 use ReflectionClass;
 
 class Container implements ArrayAccess
@@ -32,6 +33,12 @@ class Container implements ArrayAccess
 		return $this->contains[$key];
 	}
 
+	/**
+	 * Analyse les providers
+	 *
+	 * @param array $providers
+	 * @return void
+	 */
 	protected function register(array $providers)
 	{
 		foreach ($providers as $key => $value) {
@@ -43,24 +50,65 @@ class Container implements ArrayAccess
 					$param = $this->getParam($value);
 					break;
 				case is_array($value):
+					$param = array_map("$this->getParam", $value);
 					break;
 			}
-
 			$className = $this->classNames[$key];
-			$this->build($key, $className, $param);
+			$closure = $this->getClosure($key, $className, $param);
+			$this->build($closure);
 		}
 	}
-
-	private function build($key, $className, $param = null) {
-		$closure = function() use ($className, $param) {
-			return new $className($param);	
+	
+	/**
+	 * Retourne la closure
+	 *
+	 * @param string $key
+	 * @param string $className
+	 * @param mixed $param
+	 */
+	private function getClosure($key, $className, $param = null) {
+		return function() use ($className, $param) {
+			switch($param) {
+				case empty($param):
+					return new $className();
+					break;
+				case is_string($param):
+					return new $className($param);
+					break
+				case is_array($param):
+					$nb = count($param);
+					switch($nb) {
+						case 2:
+							return new $className($param[0], $param[1]);
+							break;
+						case 3:
+							return new $className($param[0], $param[1], $param[2]);
+							break;
+					}
+					break;
+			}
 		};
+	}
+
+	/**
+	 * Ajoute un provider au container 
+	 *
+	 * @param closure $closure
+	 * @return void
+	 */
+	private function build(Closure $closure) {
 		$this->contains[$key] = $closure();
 	}
 
-	private function getParam($param) {
-		if (array_key_exists($param, $this->contains))	{
-			return $this->contains[$param];
+	/**
+	 * Retourne la valeur de la clé
+	 *
+	 * @param string $param
+	 * @return mixed
+	 */
+	private function getParam($key) {
+		if (array_key_exists($key, $this->contains))	{
+			return $this->contains[$key];
 		}
 	}
 
