@@ -55,7 +55,7 @@ class Container implements ArrayAccess
 			}
 			$className = $this->classNames[$key];
 			$closure = $this->getClosure($key, $className, $param);
-			$this->build($closure);
+			$this->build($key, $closure);
 		}
 	}
 	
@@ -74,7 +74,7 @@ class Container implements ArrayAccess
 					break;
 				case is_string($param):
 					return new $className($param);
-					break
+					break;
 				case is_array($param):
 					$nb = count($param);
 					switch($nb) {
@@ -96,7 +96,7 @@ class Container implements ArrayAccess
 	 * @param closure $closure
 	 * @return void
 	 */
-	private function build(Closure $closure) {
+	private function build($key, Closure $closure) {
 		$this->contains[$key] = $closure();
 	}
 
