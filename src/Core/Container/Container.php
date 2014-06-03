@@ -47,20 +47,20 @@ class Container implements ArrayAccess
 			}
 
 			$className = $this->classNames[$key];
-			$this->build($className, $param);
+			$this->build($key, $className, $param);
 		}
 	}
 
-	private function build(string $className, $param = null) {
-		
-		$this->instances[$key] = function() use ($className, $param) {
+	private function build($key, $className, $param = null) {
+		$closure = function() use ($className, $param) {
 			return new $className($param);	
-		}
+		};
+		$this->contains[$key] = $closure();
 	}
 
 	private function getParam(string $param) {
-		if (array_key_exists($param, $this->instances))	{
-			return $this->instances[$param];
+		if (array_key_exists($param, $this->contains))	{
+			return $this->contains[$param];
 		}
 	}
 
