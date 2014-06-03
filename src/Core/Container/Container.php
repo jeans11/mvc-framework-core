@@ -40,7 +40,7 @@ class Container implements ArrayAccess
 					$param = null;
 					break;
 				case is_string($value):
-					$param = $this->getParam[$value];
+					$param = $this->getParam($value);
 					break;
 				case is_array($value):
 					break;
@@ -58,7 +58,7 @@ class Container implements ArrayAccess
 		$this->contains[$key] = $closure();
 	}
 
-	private function getParam(string $param) {
+	private function getParam($param) {
 		if (array_key_exists($param, $this->contains))	{
 			return $this->contains[$param];
 		}

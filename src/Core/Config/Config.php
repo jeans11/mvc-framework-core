@@ -3,13 +3,13 @@ namespace Core\Config;
 
 use ArrayAccess;
 
-class Config extends Fileloader implements ArrayAccess
+class Config implements ArrayAccess
 {
 	private $configs = array();
 
 	private $configPath = null;
 
-	public function __construct(string $configPath)
+	public function __construct($configPath)
 	{
 		$this->configPath = $configPath;	
 	}
