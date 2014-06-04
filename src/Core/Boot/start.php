@@ -1,8 +1,11 @@
 <?php
+
+use Core\Config\Config;
+
 /**
  * Ajout de la config au container
  */
-$app->addInstance('config', new Config($app['path.config']))
+$app->addInstance('config', new Config($app['path.config']));
 
 /**
  * Ajoute certains services au container
