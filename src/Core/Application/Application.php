@@ -14,7 +14,6 @@ class Application extends Container
 	{
 		$classes = array(
 			'app' => 'Core\Application\Application',
-			'config' => 'Core\Config\Config'
 		);
 
 		foreach ($classes as $key => $value) {
@@ -34,6 +33,11 @@ class Application extends Container
 		}
 	}
 
+	/**
+	 * Résout les dépendances
+	 *
+	 * @return void
+	 */
 	public function solvesDependencies()
 	{
 		if (file_exists($this['path.config'].'/providers.json'))	{
@@ -41,6 +45,17 @@ class Application extends Container
 		}
 
 		$this->register(json_decode(file_get_contents(__DIR__.'/../Config/providers.json'), true));
+	}
+
+	/**
+	 * Ajoute une instance au container
+	 *
+	 * @param string $key
+	 * @param mixed $instance
+	 */
+	public function addInstance($key, $instance)
+	{
+		$this[$key] = $instance;
 	}
 
 }

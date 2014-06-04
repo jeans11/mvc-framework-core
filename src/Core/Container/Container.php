@@ -143,7 +143,7 @@ class Container implements ArrayAccess
 	 */
 	public function offsetSet($key, $value)
 	{
-
+		$this->contains[$key] = $value;
 	}
 
 	/**
