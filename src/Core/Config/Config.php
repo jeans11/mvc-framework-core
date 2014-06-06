@@ -10,7 +10,7 @@ class Config extends FileLoader implements ArrayAccess
 	 *
 	 * @var array
 	 */
-	private $configs = array();
+	protected static $configs = array();
 
 	/**
 	 * Chemin vers la config principale
@@ -19,6 +19,11 @@ class Config extends FileLoader implements ArrayAccess
 	 */
 	protected static $configPath = "";
 
+	/**
+	 * Chemin vers la librairie de l'application
+	 *
+	 * @param string $psr0
+	 */
 	protected static $psr0 = "";
 
 	/**

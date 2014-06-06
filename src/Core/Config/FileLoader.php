@@ -19,7 +19,29 @@ class FileLoader
 	{
 		if (file_exists($file = static::$configPath."/$key.json")) {
 			return $this->parseJson($file);
+		} else {
+			return $this->getConfigBundles($key);
 		}
+	}
+
+	/**
+	 * Chargement de la configuration
+	 * demandée pour chaque bundle
+	 *
+	 * @param string $key
+	 * @return array
+	 */
+	private function getConfigBundles($key)
+	{
+		$merge = array();
+		foreach (static::$configs['bundle'] as $bundle)	{
+			if (file_exists($file = static::$psr0."/ucfirst($bundle)/"."/config/".$key))	{
+				$merge = array_merge($merge, $this->parseJson($file));
+			}
+		}
+		print_r($merge);
+		die;
+		return $merge;
 	}
 }
 
