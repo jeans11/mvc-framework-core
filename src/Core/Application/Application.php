@@ -19,11 +19,13 @@ class Application extends Container
 	public function addToClassNames($alias)
 	{
 		$classes = array(
-			'app' => 'Core\Application\Application',
+			'Core\Application\Application' => array(
+				'aliasProvider' => 'app'
+			)
 		);
 
-		foreach ($classes as $key => $value) {
-			$this->classNames[$key] = $value;
+		foreach (array_merge($classes, $alias) as $key => $value) {
+			$this->classNames[$value['aliasProvider']] = $key;
 		}
 	}
 

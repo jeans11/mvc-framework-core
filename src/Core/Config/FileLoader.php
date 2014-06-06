@@ -35,12 +35,10 @@ class FileLoader
 	{
 		$merge = array();
 		foreach (static::$configs['bundle'] as $bundle)	{
-			if (file_exists($file = static::$psr0."/ucfirst($bundle)/"."/config/".$key))	{
+			if (file_exists($file = static::$psr0."/".ucfirst($bundle)."/config/$key.json")) {
 				$merge = array_merge($merge, $this->parseJson($file));
 			}
 		}
-		print_r($merge);
-		die;
 		return $merge;
 	}
 }
