@@ -17,7 +17,7 @@ class FileLoader
 	 */
 	protected function load($key)
 	{
-		if (file_exists($file = self::$configPath."/$key.json")) {
+		if (file_exists($file = static::$configPath."/$key.json")) {
 			return $this->parseJson($file);
 		}
 	}
