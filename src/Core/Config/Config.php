@@ -17,9 +17,9 @@ class Config extends FileLoader implements ArrayAccess
 	 *
 	 * @var string
 	 */
-	protected $configPath = "";
+	protected static $configPath = "";
 
-	protected $psr0 = "";
+	protected static $$psr0 = "";
 
 	/**
 	 * Créer un nouvel objet Config
@@ -28,8 +28,8 @@ class Config extends FileLoader implements ArrayAccess
 	 */
 	public function __construct($configPath, $psr0)
 	{
-		$this->configPath = $configPath;	
-		$this->psr0 = $psr0;
+		self::$configPath = $configPath;	
+		self::$psr0 = $psr0;
 	}
 	
 	public function get($key)

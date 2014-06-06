@@ -2,6 +2,7 @@
 namespace Core\Application;
 
 use Core\Container\Container;
+use Core\Bracket\Traits\ParseJsonTrait;
 
 class Application extends Container
 {
@@ -43,8 +44,7 @@ class Application extends Container
 		if (file_exists($this['path.config'].'/providers.json'))	{
 				
 		}
-
-		$this->register(json_decode(file_get_contents(__DIR__.'/../Config/providers.json'), true));
+		$this->register($this->parseJson(__DIR__.'/../Config/providers.json'));
 	}
 
 	/**

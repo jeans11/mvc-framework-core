@@ -5,7 +5,9 @@ class FileLoader
 {
 	protected function load($key)
 	{
-		echo static::$configPath;
+		if ($file = file_exists(self::$configPath."/$key.json")) {
+			echo $file;
+		}
 	}
 }
 
