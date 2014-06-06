@@ -2,8 +2,9 @@
 namespace Core\Config;
 
 use ArrayAccess;
+use FileLoader;
 
-class Config implements ArrayAccess
+class Config extends FileLoader implements ArrayAccess
 {
 	/**
 	 * Tableau contenant la config
@@ -11,6 +12,8 @@ class Config implements ArrayAccess
 	 * @var array
 	 */
 	private $configs = array();
+
+	private $bundles = array();
 
 	/**
 	 * Chemin vers la config
@@ -27,6 +30,11 @@ class Config implements ArrayAccess
 	public function __construct($configPath)
 	{
 		$this->configPath = $configPath;	
+	}
+	
+	public function get($key)
+	{
+		echo $key;			
 	}
 
 	/**
