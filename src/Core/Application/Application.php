@@ -13,9 +13,10 @@ class Application extends Container
 	/**
 	 * Ajoute les services au container 
 	 * 
+	 * @param array $alias
 	 * @return void
 	 */
-	public function addToClassNames()
+	public function addToClassNames($alias)
 	{
 		$classes = array(
 			'app' => 'Core\Application\Application',

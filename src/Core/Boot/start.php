@@ -7,17 +7,17 @@ use Core\Config\Config;
  */
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']));
 
-$config = $app['config'];
-
 /**
  * Charge les bundles
  */
+$config = $app['config'];
+
 $config['bundle'];
 
 /**
  * Ajoute certains services au container
  */
-$app->addToClassNames();
+$app->addToClassNames($config['alias']);
 
 /**
  * Résout les dépendances
