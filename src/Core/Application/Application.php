@@ -2,10 +2,14 @@
 namespace Core\Application;
 
 use Core\Container\Container;
-use Core\Bracket\Traits\ParseJsonTrait;
 
 class Application extends Container
 {
+	/**
+	 * Appel de certains traits
+	 */
+	use \Core\Bracket\Traits\ParseJsonTrait;
+
 	/**
 	 * Ajoute les services au container 
 	 * 

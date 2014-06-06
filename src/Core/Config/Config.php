@@ -19,7 +19,7 @@ class Config extends FileLoader implements ArrayAccess
 	 */
 	protected static $configPath = "";
 
-	protected static $$psr0 = "";
+	protected static $psr0 = "";
 
 	/**
 	 * Créer un nouvel objet Config
@@ -34,7 +34,7 @@ class Config extends FileLoader implements ArrayAccess
 	
 	public function get($key)
 	{
-		$this->configs[$key] = $this->load($key);
+		return $this->configs[$key] = $this->load($key);
 	}
 
 	/**
@@ -45,7 +45,7 @@ class Config extends FileLoader implements ArrayAccess
 	 */
 	public function offsetGet($key)
 	{
-	
+		return $this->get($key);
 	}
 
 	public function offsetSet($key, $value)
