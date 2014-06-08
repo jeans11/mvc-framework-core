@@ -46,12 +46,9 @@ class Application extends Container
 	 *
 	 * @return void
 	 */
-	public function solvesDependencies()
+	public function solvesDependencies($providers)
 	{
-		if (file_exists($this['path.config'].'/providers.json'))	{
-				
-		}
-		$this->register($this->parseJson(__DIR__.'/../Config/providers.json'));
+		$this->register(array_merge($providers, $this->parseJson(__DIR__.'/../Config/providers.json')));
 	}
 
 	/**

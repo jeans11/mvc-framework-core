@@ -22,7 +22,6 @@ $app->addToClassNames($config['alias']);
 /**
  * Résout les dépendances
  */
-$app->solvesDependencies();
-
+$app->solvesDependencies($config['providers']);
 
 
