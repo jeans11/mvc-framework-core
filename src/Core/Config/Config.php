@@ -39,7 +39,7 @@ class Config extends FileLoader implements ArrayAccess
 	
 	public function get($key)
 	{
-		return $this->configs[$key] = $this->load($key);
+		return self::$configs[$key] = $this->load($key);
 	}
 
 	/**
