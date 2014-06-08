@@ -48,7 +48,11 @@ class Application extends Container
 	 */
 	public function solvesDependencies($providers)
 	{
-		$this->register(array_merge($providers, $this->parseJson(__DIR__.'/../Config/providers.json')));
+		$services = $this->parseJson(__DIR__.'/../Config/providers.json');
+		if (is_array($providers) {
+			$services = array_merge($services, $providers);
+		}
+		$this->register($services);
 	}
 
 	/**
