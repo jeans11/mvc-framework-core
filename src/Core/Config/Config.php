@@ -33,13 +33,17 @@ class Config extends FileLoader implements ArrayAccess
 	 */
 	public function __construct($configPath, $psr0)
 	{
-		self::$configPath = $configPath;	
-		self::$psr0 = $psr0;
+		static::$configPath = $configPath;	
+		static::$psr0 = $psr0;
 	}
 	
 	public function get($key)
 	{
-		return self::$configs[$key] = $this->load($key);
+		if ($this->offsetExists($key)) {
+			return $this->configs[$key];
+		} else {
+			return static::$configs[$key] = $this->load($key);
+		}
 	}
 
 	/**

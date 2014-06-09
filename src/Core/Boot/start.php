@@ -1,6 +1,7 @@
 <?php
 
 use Core\Config\Config;
+use Core\Bracket\LoadAliasClass;
 
 /**
  * Ajout de la config au container
@@ -24,4 +25,8 @@ $app->addToClassNames($config['alias']);
  */
 $app->solvesDependencies($config['providers']);
 
+/**
+ * Charge les alias de classes
+ */
+//LoadAliasClass::getInstance($config['alias'])->check();
 
