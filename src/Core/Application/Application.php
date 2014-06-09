@@ -16,7 +16,7 @@ class Application extends Container
 	 * @param array $alias
 	 * @return void
 	 */
-	public function addToClassNames($alias)
+	public function addToClassNames($alias = array())
 	{
 		$classes = array(
 			'Core\Application\Application' => array(
@@ -46,13 +46,9 @@ class Application extends Container
 	 *
 	 * @return void
 	 */
-	public function solvesDependencies($providers)
+	public function solvesDependencies($providers = array())
 	{
-		$services = $this->parseJson(__DIR__.'/../Config/providers.json');
-		if (is_array($providers)) {
-			$services = array_merge($services, $providers);
-		}
-		$this->register($services);
+		$this->register(array_merge($this->parseJson(__DIR__.'/../Config/providers.json'), $providers));
 	}
 
 	/**

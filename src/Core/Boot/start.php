@@ -28,5 +28,5 @@ $app->solvesDependencies($config['providers']);
 /**
  * Charge les alias de classes
  */
-//LoadAliasClass::getInstance($config['alias'])->check();
+LoadAliasClass::getInstance($config['alias'])->check();
 

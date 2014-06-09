@@ -11,14 +11,28 @@ class LoadAliasClass
 	private static $instance;
 
 	/**
+	 * Tableau des aliases
+	 *
+	 * @var array
+	 */
+	private $aliases;
+
+	/**
+	 * Chargeur enregistré
+	 *
+	 * @var boolean
+	 */
+	private $checked = false;
+
+	/**
 	 * Crée un nouvelle instance
 	 *
 	 * @param array $aliases
 	 * @return void
 	 */
-	public function __construct($aliases)
+	public function __construct($aliases = array())
 	{
-	
+		$this->aliases = $aliases;	
 	}
 
 	/**
@@ -27,10 +41,35 @@ class LoadAliasClass
 	 * @param array $aliases
 	 * @return \Core\Bracket\LoadAliasClass
 	 */
-	public static function getInstance($aliases)
+	public static function getInstance($aliases = array())
 	{
-		if (is_null(self::$instance)) {
+		if (is_null(static::$instance)) {
+			static::$instance = new self($aliases);
+		}
+		$this->aliases[] = $aliases;
+		return static::$instance;
+	}
 
+	/**
+	 * Charge 
+	 */
+	public function loader($alias)
+	{
+		if (isset($this->aliases[$alias])) {
+			return class_alias($this->aliases[$alias], $alias);
+		}
+	}
+
+	private function addToAutoload()
+	{
+		spl_autoload_register(array($this,'loader'), true, true);
+	}
+
+	public function check()
+	{
+		if (!$this->checked) {
+			$this->addToAutoload();	
+			$this->checked = true;
 		}
 	}
 }
