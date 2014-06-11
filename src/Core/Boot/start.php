@@ -30,3 +30,6 @@ $app->solvesDependencies($config['providers']);
  */
 LoadAliasClass::getInstance($config['alias'])->check();
 
+/**
+ * Router
+ */

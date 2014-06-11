@@ -32,7 +32,7 @@ class LoadAliasClass
 	 */
 	public function __construct($aliases = array())
 	{
-		$this->aliases = $aliases;	
+		$this->aliases = $this->setAlias($aliases);	
 	}
 
 	/**
@@ -50,7 +50,10 @@ class LoadAliasClass
 	}
 
 	/**
-	 * Charge 
+	 * Recherche la classe et créé l'alias 
+	 *
+	 * @param string $alias
+	 * @return void
 	 */
 	public function loader($alias)
 	{
@@ -59,16 +62,42 @@ class LoadAliasClass
 		}
 	}
 
+	/**
+	 * Informe la pile d'autoload de charger la
+	 * function loader
+	 *
+	 * @return void
+	 */
 	private function addToAutoload()
 	{
 		spl_autoload_register(array($this,'loader'), true, true);
 	}
 
+	/**
+	 * Enregistre les alias
+	 *
+	 * @return void
+	 */
 	public function check()
 	{
 		if (!$this->checked) {
 			$this->addToAutoload();	
 			$this->checked = true;
 		}
+	}
+
+	/**
+	 * Modifie le tableau des alias
+	 *
+	 * @param array $aliases
+	 * @return array $return
+	 */
+	private function setAlias($aliases)
+	{
+		$return = array();
+		foreach ($aliases as $className => $alias) {
+			$return[$alias['aliasClassName']] = $className;
+		}
+		return $return;
 	}
 }
