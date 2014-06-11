@@ -46,7 +46,6 @@ class LoadAliasClass
 		if (is_null(static::$instance)) {
 			static::$instance = new self($aliases);
 		}
-		$this->aliases[] = $aliases;
 		return static::$instance;
 	}
 
