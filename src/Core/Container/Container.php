@@ -43,7 +43,7 @@ class Container implements ArrayAccess
 	{
 		foreach ($providers as $key => $value) {
 			switch ($value) {
-				case empty($value):
+				case null: 
 					$param = null;
 					break;
 				case is_string($value):
@@ -69,7 +69,7 @@ class Container implements ArrayAccess
 	private function getClosure($key, $className, $param = null) {
 		return function() use ($className, $param) {
 			switch($param) {
-				case empty($param):
+				case null: 
 					return new $className();
 					break;
 				case is_string($param):
