@@ -21,6 +21,12 @@ class Application extends Container
 		$classes = array(
 			'Core\Application\Application' => array(
 				'aliasProvider' => 'app'
+			),
+			'Core\Http\HttpRequest' => array(
+				'aliasProvider'	=> 'httpRequest'
+			),
+			'Core\Routing\Router' => array(
+				'aliasProvider'	=> 'router'
 			)
 		);
 
