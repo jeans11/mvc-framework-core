@@ -68,4 +68,8 @@ class Application extends Container
 		$this[$key] = $instance;
 	}
 
+	public function setRouter($router)
+	{
+		var_dump($router);
+	}
 }
