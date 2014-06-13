@@ -72,7 +72,7 @@ class Container implements ArrayAccess
 				case null: 
 					return new $className();
 					break;
-				case is_string($param):
+				case is_string($param) || is_object($param):
 					return new $className($param);
 					break;
 				case is_array($param):

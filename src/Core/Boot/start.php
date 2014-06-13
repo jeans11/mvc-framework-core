@@ -33,4 +33,14 @@ LoadAliasClass::getInstance($config['alias'])->check();
 /**
  * Router
  */
-$app->setRouter($app['router']);
+$router = $app['router'];
+
+/**
+ * Enregistre les routes
+ */
+$router->setRoutes($config['routes']);
+
+/**
+ * Enregistre le router de l'application 
+ */
+$app->setRouter($router);

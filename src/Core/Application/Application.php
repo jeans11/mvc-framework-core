@@ -2,6 +2,7 @@
 namespace Core\Application;
 
 use Core\Container\Container;
+use Core\Routing\Router;
 
 class Application extends Container
 {
@@ -9,6 +10,13 @@ class Application extends Container
 	 * Appel de certains traits
 	 */
 	use \Core\Bracket\Traits\ParseJsonTrait;
+
+	/**
+	 * Instance du router
+	 *
+	 * @var Core\Routing\Router
+	 */
+	private $router;
 
 	/**
 	 * Ajoute les services au container 
@@ -68,8 +76,14 @@ class Application extends Container
 		$this[$key] = $instance;
 	}
 
-	public function setRouter($router)
+	/**
+	 * Modifie le router
+	 *
+	 * @param Core\Routing\Router
+	 * @return void
+	 */
+	public function setRouter(Router $router)
 	{
-		var_dump($router);
+		$this->router = $router;
 	}
 }
