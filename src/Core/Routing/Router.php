@@ -30,8 +30,14 @@ class Router
 		$this->httpRequest = $httpRequest;
 	}
 
+	/**
+	 * Modifie les routes
+	 *
+	 * @param array $routes
+	 * @return void
+	 */
 	public function setRoutes($routes = array())
 	{
-		print_r($routes);
+		$this->routes = $routes;	
 	}
 }

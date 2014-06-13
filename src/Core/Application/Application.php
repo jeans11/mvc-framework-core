@@ -86,4 +86,12 @@ class Application extends Container
 	{
 		$this->router = $router;
 	}
+
+	/**
+	 * Démarre l'application
+	 */
+	public function run()
+	{
+			
+	}
 }
