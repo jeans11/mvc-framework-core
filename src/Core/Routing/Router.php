@@ -38,6 +38,14 @@ class Router
 	 */
 	public function setRoutes($routes = array())
 	{
-		$this->routes = $routes;	
+		$this->routes = $this->buildRoute($routes);	
+	}
+
+	private function buildRoute($routes) {
+		$returns = array();
+		foreach	($routes as $route) {
+			$returns[] = new Route($route);
+		}
+		return $returns;
 	}
 }
