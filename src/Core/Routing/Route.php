@@ -18,18 +18,39 @@ class Route
 		$this->hydrate($route);
 	}
 
+	/**
+	 * Assignation des attributs et des valeurs
+	 *
+	 * @param array $data
+	 * @return void
+	 */
 	private function hydrate($data)
 	{
-		print_r($data);
-	}
-
-	public function __get($attribute)
-	{
-		if (isset($value = $this->attributes[$attribute])) {
-			return $value;
+		foreach ($data as $key => $value) {
+			$this->__set($key, $value);
 		}
 	}
 
+	/**
+	 * Retourne la valeur d'un attribut
+	 *
+	 * @param string $attribut
+	 * @return mixed
+	 */
+	public function __get($attribute)
+	{
+		if (isset($this->attributes[$attribute])) {
+			return $this->attributes[$attribute];
+		}
+	}
+
+	/**
+	 * Assigne les valeurs aux attributs
+	 *
+	 * @param string $attributes
+	 * @param mixed $value
+	 * @return void
+	 */
 	public function __set($attribute, $value)
 	{
 		$this->attributes[$attribute] = $value;

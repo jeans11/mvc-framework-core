@@ -41,6 +41,13 @@ class Router
 		$this->routes = $this->buildRoute($routes);	
 	}
 
+	/**
+	 * Crée pour chaque route un objet
+	 * Route
+	 *
+	 * @param array $routes
+	 * @return array
+	 */
 	private function buildRoute($routes) {
 		$returns = array();
 		foreach	($routes as $route) {
