@@ -3,6 +3,7 @@ namespace Core\Application;
 
 use Core\Container\Container;
 use Core\Routing\Router;
+use Core\Http\HttpRequest;
 
 class Application extends Container
 {
@@ -87,11 +88,20 @@ class Application extends Container
 		$this->router = $router;
 	}
 
+	private function getClientRequest(Router $router, HttpRequest $request)
+	{
+		return new RouteMatcher($router, $request);
+	}
+
 	/**
 	 * Démarre l'application
 	 */
 	public function run()
 	{
-
+		$matcher = $this->getClientRequest(
+			$this->router,
+			$this['request']
+		);
 	}
 }
+

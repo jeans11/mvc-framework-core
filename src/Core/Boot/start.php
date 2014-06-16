@@ -4,9 +4,11 @@ use Core\Config\Config;
 use Core\Bracket\LoadAliasClass;
 
 /**
- * Ajout de la config au container
+ * Ajout de la config et de la requête au container
  */
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']));
+
+$app->addInstance('request', new HttpRequest());
 
 /**
  * Charge les bundles
