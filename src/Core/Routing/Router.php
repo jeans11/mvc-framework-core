@@ -3,9 +3,11 @@ namespace Core\Routing;
 
 use Core\Http\HttpRequest;
 use ArrayAccess;
+use Iterator;
 
-class Router implements ArrayAccess
+class Router implements ArrayAccess, Iterator
 {
+	private $handler;
 	/**
 	 * Tableau des routes
 	 *
@@ -105,5 +107,24 @@ class Router implements ArrayAccess
 	public function offsetUnset($key)
 	{
 		unset($this->routes[$key]);
+	}
+
+	public function current(){}
+
+	public function key(){}
+
+	public function next()
+	{
+		$this->handler++;	
+	}
+
+	public function rewind()
+	{
+		$this->handler = 0;	
+	}
+
+	public function valid()
+	{
+		return isset($this->routes[$this->handler]);
 	}
 }

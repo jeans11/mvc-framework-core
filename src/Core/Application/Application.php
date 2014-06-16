@@ -3,6 +3,7 @@ namespace Core\Application;
 
 use Core\Container\Container;
 use Core\Routing\Router;
+use Core\Routing\RouteMatcher;
 use Core\Http\HttpRequest;
 
 class Application extends Container

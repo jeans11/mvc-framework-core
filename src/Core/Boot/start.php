@@ -2,6 +2,7 @@
 
 use Core\Config\Config;
 use Core\Bracket\LoadAliasClass;
+use Core\Http\HttpRequest;
 
 /**
  * Ajout de la config et de la requête au container
