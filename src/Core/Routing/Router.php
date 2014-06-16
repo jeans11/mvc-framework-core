@@ -1,13 +1,19 @@
 <?php
 namespace Core\Routing;
 
-use Core\Http\HttpRequest;
 use ArrayAccess;
 use Iterator;
+use Countable;
 
-class Router implements ArrayAccess, Iterator
+class Router implements ArrayAccess, Iterator, Countable
 {
-	private $handler;
+	/**
+	 * Curseur de lecture du tableau
+	 *
+	 * @var integer
+	 */
+	private $handler = 0;
+
 	/**
 	 * Tableau des routes
 	 *
@@ -60,6 +66,13 @@ class Router implements ArrayAccess, Iterator
 	 */
 	private function set($key, $value)
 	{
+		if (is_null($key)) {
+			$key = count($this);
+
+			if ($key != 0) {
+				$key++;	
+			}
+		}
 		$this->routes[$key]	= $value;
 	}
 
@@ -109,22 +122,69 @@ class Router implements ArrayAccess, Iterator
 		unset($this->routes[$key]);
 	}
 
-	public function current(){}
+	/**
+	 * Retourne l'élément courant du
+	 * tableau
+	 *
+	 * @return mixed
+	 */
+	public function current()
+	{
+		return $this->routes[$this->handler];
+	}
 
-	public function key(){}
+	/**
+	 * Retourne la clé actuelle
+	 * (c'est la position)
+	 *
+	 * @return integer
+	 */
+	public function key()
+	{
+		return $this->handler;	
+	}
 
+	/**
+	 * Déplace le curseur vers
+	 * l'élement suivant
+	 *
+	 * @return void
+	 */
 	public function next()
 	{
 		$this->handler++;	
 	}
 
+	/**
+	 * Remet la position du
+	 * curseur à 0
+	 *
+	 * @return void
+	 */
 	public function rewind()
 	{
 		$this->handler = 0;	
 	}
 
+	/**
+	 * Vérfie l'existence de la position
+	 * du curseur
+	 *
+	 * @return boolean
+	 */
 	public function valid()
 	{
 		return isset($this->routes[$this->handler]);
+	}
+
+	/**
+	 * Retourne le nombre d'élement
+	 * du tableau
+	 *
+	 * @return integer
+	 */
+	public function count()
+	{
+		return count($this->routes);
 	}
 }
