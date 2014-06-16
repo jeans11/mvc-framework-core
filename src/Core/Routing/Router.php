@@ -2,33 +2,16 @@
 namespace Core\Routing;
 
 use Core\Http\HttpRequest;
+use ArrayAccess;
 
-class Router
+class Router implements ArrayAccess
 {
-	/**
-	 * Référence HttpRequest
-	 *
-	 * @var Core\Http\HttpRequest
-	 */		
-	private $httpRequest;
-
 	/**
 	 * Tableau des routes
 	 *
 	 * @var array
 	 */
 	private $routes = array();
-
-	/**
-	 * Crée une instance 
-	 *
-	 * @param Core\Http\HttpRequest
-	 * @return void
-	 */
-
-	public function __construct(HttpRequest $httpRequest) {
-		$this->httpRequest = $httpRequest;
-	}
 
 	/**
 	 * Modifie les routes
@@ -38,7 +21,7 @@ class Router
 	 */
 	public function setRoutes($routes = array())
 	{
-		$this->routes = $this->buildRoute($routes);	
+		$this->buildRoute($routes);	
 	}
 
 	/**
@@ -49,10 +32,38 @@ class Router
 	 * @return array
 	 */
 	private function buildRoute($routes) {
-		$returns = array();
 		foreach	($routes as $route) {
-			$returns[] = new Route($route);
+			$this[] = new Route($route);
 		}
-		return $returns;
+	}
+
+	private function get($key)
+	{
+		return $this->routes[$key];
+	}
+
+	private function set($key, $value)
+	{
+		$this->routes[$key]	= $value;
+	}
+
+	public function offsetGet($key)
+	{
+		return $this->get($key);
+	}
+
+	public function offsetSet($key, $value)
+	{
+		return $this->set($key,$value);
+	}
+
+	public function offsetExists($key)
+	{
+		return isset($this->routes[$key]);
+	}
+
+	public function offsetUnset($key)
+	{
+		unset($this->routes[$key]);
 	}
 }

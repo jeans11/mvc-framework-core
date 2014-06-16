@@ -92,6 +92,6 @@ class Application extends Container
 	 */
 	public function run()
 	{
-			
+
 	}
 }
