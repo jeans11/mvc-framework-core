@@ -17,17 +17,17 @@ class RouteMatcher
 
 	public function match()
 	{
-		if ($route = $this->matchRoute($this->router)) {
+		if ($route = $this->matchRoute()) {
 			return $route;	
 		}
 	}
 
-	private function matchRoute(Router $router)
+	private function matchRoute()
 	{
-		foreach ($router as $route)	{
-			var_dump($route);
+		foreach ($this->router as $route)	{
+			if ($values = $route->match($this->request->uri()))	{
+				print_r($values);
+			}
 		}
-
-		die;
 	}
 }

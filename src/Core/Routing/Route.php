@@ -5,6 +5,8 @@ class Route
 {
 	/**
 	 * Tableau des attributs
+	 *
+	 * @var array
 	 */
 	private $attributes = array();
 
@@ -54,5 +56,14 @@ class Route
 	public function __set($attribute, $value)
 	{
 		$this->attributes[$attribute] = $value;
+	}
+
+	public function match($url)
+	{
+		if (preg_match('`'.$this->url.'$`', $url, $matches)) {
+			return $matches;	
+		} else {
+			return false;	
+		}
 	}
 }
