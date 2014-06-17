@@ -29,7 +29,7 @@ class Route
 	private function hydrate($data)
 	{
 		foreach ($data as $key => $value) {
-			$this->__set($key, $value);
+			$this->$key = $value;
 		}
 	}
 
@@ -65,5 +65,10 @@ class Route
 		} else {
 			return false;	
 		}
+	}
+
+	public function compileRoute()
+	{
+		$this->url = preg_replace(/{(.*)}/, '('.$this->where[$1].')', $this->url);
 	}
 }

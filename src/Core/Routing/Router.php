@@ -68,10 +68,6 @@ class Router implements ArrayAccess, Iterator, Countable
 	{
 		if (is_null($key)) {
 			$key = count($this);
-
-			if ($key != 0) {
-				$key++;	
-			}
 		}
 		$this->routes[$key]	= $value;
 	}
