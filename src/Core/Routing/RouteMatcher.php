@@ -25,7 +25,7 @@ class RouteMatcher
 	private function matchRoute()
 	{
 		foreach ($this->router as $route)	{
-			$route->compileRoute();
+			$route->decodeRoute();
 			if ($values = $route->match($this->request->uri()))	{
 				print_r($values);
 			}

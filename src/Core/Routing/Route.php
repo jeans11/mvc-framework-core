@@ -1,6 +1,8 @@
 <?php
 namespace Core\Routing;
 
+use Core\Bracket\RegEx\RegExFactory;
+
 class Route
 {
 	/**
@@ -67,8 +69,22 @@ class Route
 		}
 	}
 
-	public function compileRoute()
+	public function decodeRoute()
 	{
-		$this->url = preg_replace(/{(.*)}/, '('.$this->where[$1].')', $this->url);
+		$this->paramsName = $this->extractParams(); 
+		$this->replaceParams();
+	}
+
+	private function extractParams()
+	{
+		preg_match_all('#\{(\w*)\}#', $this->url, $matches);
+		return $matches[1];
+	}
+	
+	private function replaceParams()
+	{
+		foreach ($this->paramsName as $param) {
+			$this->url = preg_replace('/\{'.$param.'\}/', (string) RegEx::get($this->where[$param]), $this->url);
+		}		
 	}
 }
