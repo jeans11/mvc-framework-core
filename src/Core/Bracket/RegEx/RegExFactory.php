@@ -5,7 +5,7 @@ class RegExFactory
 {
 	public static function get($type)
 	{
-		$className = 'RegExp'.ucfirst($type);
+		$className = 'Core\Bracket\RegEx\RegEx'.ucfirst($type);
 		return new $className;
 	}
 }

@@ -60,6 +60,12 @@ class Route
 		$this->attributes[$attribute] = $value;
 	}
 
+	/**
+	 * Retourne l'url et les paramètres matchés
+	 *
+	 * @param string $url
+	 * @return mixed
+	 */
 	public function match($url)
 	{
 		if (preg_match('`'.$this->url.'$`', $url, $matches)) {
@@ -69,22 +75,38 @@ class Route
 		}
 	}
 
+	/**
+	 * Décode l'url de la route
+	 *
+	 * @return void
+	 */
 	public function decodeRoute()
 	{
 		$this->paramsName = $this->extractParams(); 
 		$this->replaceParams();
 	}
 
+	/**
+	 * Extrait les paramètres de la route
+	 *
+	 * @return array
+	 */
 	private function extractParams()
 	{
 		preg_match_all('#\{(\w*)\}#', $this->url, $matches);
 		return $matches[1];
 	}
 	
+	/**
+	 * Remplace les paramètres de la route
+	 * par une expression régulière
+	 *
+	 * @return void
+	 */
 	private function replaceParams()
 	{
 		foreach ($this->paramsName as $param) {
-			$this->url = preg_replace('/\{'.$param.'\}/', (string) RegEx::get($this->where[$param]), $this->url);
+			$this->url = preg_replace('/\{'.$param.'\}/', (string) RegExFactory::get($this->where[$param]), $this->url);
 		}		
 	}
 }
