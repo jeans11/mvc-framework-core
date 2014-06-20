@@ -5,6 +5,7 @@ use Core\Container\Container;
 use Core\Routing\Router;
 use Core\Routing\RouteMatcher;
 use Core\Http\HttpRequest;
+use Core\Controller\ResolverController;
 
 class Application extends Container
 {
@@ -78,20 +79,14 @@ class Application extends Container
 		$this[$key] = $instance;
 	}
 
-	/**
-	 * Modifie le router
-	 *
-	 * @param Core\Routing\Router
-	 * @return void
-	 */
-	public function setRouter(Router $router)
-	{
-		$this->router = $router;
-	}
-
 	private function getClientRequest(Router $router, HttpRequest $request)
 	{
 		return new RouteMatcher($router, $request);
+	}
+
+	private function resolveController(RouteMatcher $routeMatcher)
+	{
+		return new ResolverController($routeMatcher);
 	}
 
 	/**
@@ -100,9 +95,10 @@ class Application extends Container
 	public function run()
 	{
 		$matcher = $this->getClientRequest(
-			$this->router,
+			$this['router'],
 			$this['request']
 		);
+		$resolveController = $this->resolveController($matcher);
 	}
 }
 

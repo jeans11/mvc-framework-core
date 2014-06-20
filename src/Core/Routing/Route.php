@@ -113,16 +113,37 @@ class Route
 		}		
 	}
 
+	/**
+	 * Vérifie la présence de
+	 * paramètre
+	 *
+	 * @return boolean
+	 */
 	public function hasParams()
 	{
 		return $this->paramsName != array();	
 	}
 
+	/**
+	 * Affecte aux paramètres les valeurs
+	 * correspondantes
+	 *
+	 * @param array $data
+	 * @return void
+	 */
 	public function setParamsValue($data)
 	{
 		$this->paramsValue = $this->getParamsValue($data);
 	}
 
+	/**
+	 * Construit un tableau clé => valeur
+	 * avec pour chaque paramètre la valeur
+	 * matché
+	 *
+	 * @param array $data
+	 * @return array
+	 */
 	private function getParamsValue($data)
 	{
 		$paramsValue = array();

@@ -46,4 +46,4 @@ $router->setRoutes($config['routes']);
 /**
  * Enregistre le router de l'application 
  */
-$app->setRouter($router);
+$app->addInstance('router', $router);
