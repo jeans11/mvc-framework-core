@@ -56,7 +56,10 @@ class RouteMatcher
 		foreach ($this->router as $route)	{
 			$route->decodeRoute();
 			if ($values = $route->match($this->request->uri()))	{
-				print_r($values);
+				if ($route->hasParams()) {
+					$route->setParamsValue(array_slice($values, 1));
+				}
+				return $route;
 			}
 		}
 	}

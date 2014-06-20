@@ -83,7 +83,10 @@ class Route
 	public function decodeRoute()
 	{
 		$this->paramsName = $this->extractParams(); 
-		$this->replaceParams();
+
+		if ($this->hasParams()) {
+			$this->replaceParams();
+		}
 	}
 
 	/**
@@ -106,7 +109,28 @@ class Route
 	private function replaceParams()
 	{
 		foreach ($this->paramsName as $param) {
-			$this->url = preg_replace('/\{'.$param.'\}/', (string) RegExFactory::get($this->where[$param]), $this->url);
+			$this->url = preg_replace('/\{'.$param.'\}/', '('.(string) RegExFactory::get($this->where[$param]).')', $this->url);
 		}		
+	}
+
+	public function hasParams()
+	{
+		return $this->paramsName != array();	
+	}
+
+	public function setParamsValue($data)
+	{
+		$this->paramsValue = $this->getParamsValue($data);
+	}
+
+	private function getParamsValue($data)
+	{
+		$paramsValue = array();
+
+		foreach ($data as $key => $value) {
+			$paramsValue[$this->paramsName[$key]] = $value;
+		}
+
+		return $paramsValue;
 	}
 }
