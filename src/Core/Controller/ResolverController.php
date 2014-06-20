@@ -6,7 +6,7 @@ use Core\Routing\RouteMatcher;
 class ResolverController
 { 
 
-	use Core\Bracket\Traits\ReflectionClassTrait;
+	use \Core\Bracket\Traits\ReflectionClassTrait;
 
 	/**
 	 * Instance de RouteMatcher
@@ -22,6 +22,8 @@ class ResolverController
 	 */
 	private $routeMatched;
 
+	private $routeMatched;
+
 	/**
 	 * Crée une instance
 	 *
@@ -31,6 +33,7 @@ class ResolverController
 	{
 		$this->matcher = $matcher;	
 		$this->setRouteMatched();
+		$this->class = $this->getReflectionClass($this->getControllerName());
 	}
 
 	/**
@@ -84,7 +87,43 @@ class ResolverController
 	public function getInstanceController()
 	{
 		$class = $this->getReflectionClass($this->getControllerName());
-		var_dump($class);
+
+		if ($class->hasMethod('__construct')) {
+			$args = $this->getArgsContructeur($class);
+		}
+
+		return $class->newInstanceArgs($args);
+	}
+
+	public function getMethodParameters()
+	{
+		$paramsValue = array();
+
+		if ($this->class->hasMethod($this->getMethodName())) {
+			$method = $this->class->getMethod($this->getMethodName());
+			foreach ($method->getParameters() as $param) {
+				$paramsValue[] = $this->routeMatched->paramsValue[$param->name];
+			}
+		}
+
+		return $paramsValue;
+	}
+
+	/**
+	 * Retourne sous forme de tableau
+	 * les arguments que le controller
+	 * à besoin d'invoquer 
+	 *
+	 * @param RelectionClass
+	 * @return array
+	 */
+	private function getArgsConstructeur($class)
+	{
+		$constructeur = $class->getConstructor();	
+		
+		foreach ($constructeur->getParameters() as $params) {
+				
+		}
 	}
 }
 
