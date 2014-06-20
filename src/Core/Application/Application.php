@@ -98,7 +98,12 @@ class Application extends Container
 			$this['router'],
 			$this['request']
 		);
+
 		$resolveController = $this->resolveController($matcher);
+
+		/*$response = $this->getResponse($resolveController);
+
+		$response->send();*/
 	}
 }
 
