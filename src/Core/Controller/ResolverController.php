@@ -22,7 +22,12 @@ class ResolverController
 	 */
 	private $routeMatched;
 
-	private $routeMatched;
+	/**
+	 * Référence du controller résolu
+	 * 
+	 * @var ReflectionClass
+	 */
+	private $class;
 
 	/**
 	 * Crée une instance
@@ -95,6 +100,12 @@ class ResolverController
 		return $class->newInstanceArgs($args);
 	}
 
+	/**
+	 * Retourne un tableau des valeurs
+	 * à passer à l'action
+	 *
+	 * @return array
+	 */
 	public function getMethodParameters()
 	{
 		$paramsValue = array();

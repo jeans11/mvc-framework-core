@@ -24,11 +24,6 @@ $config['bundle'];
 $app->addToClassNames($config['alias']);
 
 /**
- * Résout les dépendances
- */
-$app->solvesDependencies($config['providers']);
-
-/**
  * Charge les alias de classes
  */
 LoadAliasClass::getInstance($config['alias'])->check();
@@ -47,3 +42,9 @@ $router->setRoutes($config['routes']);
  * Enregistre le router de l'application 
  */
 $app->addInstance('router', $router);
+
+/**
+ * Résout les dépendances
+ */
+$app->solvesDependencies($config['providers']);
+

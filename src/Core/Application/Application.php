@@ -29,7 +29,7 @@ class Application extends Container
 	 */
 	public function addToClassNames($alias = array())
 	{
-		$classes = array(
+		/*$classes = array(
 			'Core\Application\Application' => array(
 				'aliasProvider' => 'app'
 			),
@@ -40,6 +40,8 @@ class Application extends Container
 				'aliasProvider'	=> 'router'
 			)
 		);
+*/
+		$classes = $this->parseJson(__DIR__.'/../Config/alias.json');
 
 		foreach (array_merge($classes, $alias) as $key => $value) {
 			$this->classNames[$value['aliasProvider']] = $key;
@@ -79,31 +81,14 @@ class Application extends Container
 		$this[$key] = $instance;
 	}
 
-	private function getClientRequest(Router $router, HttpRequest $request)
-	{
-		return new RouteMatcher($router, $request);
-	}
-
-	private function resolveController(RouteMatcher $routeMatcher)
-	{
-		return new ResolverController($routeMatcher);
-	}
-
 	/**
 	 * Démarre l'application
 	 */
 	public function run()
 	{
-		$matcher = $this->getClientRequest(
-			$this['router'],
-			$this['request']
-		);
+		$response = $this['httpResponse'];
 
-		$resolveController = $this->resolveController($matcher);
-
-		/*$response = $this->getResponse($resolveController);
-
-		$response->send();*/
+		//$response->send();
 	}
 }
 

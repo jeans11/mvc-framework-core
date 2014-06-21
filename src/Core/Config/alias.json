@@ -1,0 +1,20 @@
+{
+	"Core\\Application\\Application":{
+		"aliasProvider":"app"
+	},
+	"Core\\Http\\HttpRequest":{
+		"aliasProvider":"httpRequest"
+	},
+	"Core\\Routing\\Router":{
+		"aliasProvider":"router"
+	},
+	"Core\\Routing\\RouteMatcher":{
+		"aliasProvider":"routeMatcher"
+	},
+	"Core\\Controller\\ResolverController":{
+		"aliasProvider":"resolveController"
+	},
+	"Core\\Http\\HttpResponse":{
+		"aliasProvider":"httpResponse"
+	}
+}
