@@ -1,6 +1,5 @@
 {
 	"httpRequest":null,
-	"router":null,
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
 	"httpResponse":"resolveController"

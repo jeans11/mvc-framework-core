@@ -22,14 +22,14 @@ class Router implements ArrayAccess, Iterator, Countable
 	private $routes = array();
 
 	/**
-	 * Modifie les routes
+	 * Crée une instance du Router
 	 *
 	 * @param array $routes
 	 * @return void
 	 */
-	public function setRoutes($routes = array())
+	public function __construct($routes = array())
 	{
-		$this->buildRoute($routes);	
+		$this->buildRoute($routes);
 	}
 
 	/**

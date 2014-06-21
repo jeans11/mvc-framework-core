@@ -50,7 +50,7 @@ class Container implements ArrayAccess
 					$param = $this->getParam($value);
 					break;
 				case is_array($value):
-					$param = array_map("$this->getParam", $value);
+					$param = array_map(array($this,'getParam'), $value);
 					break;
 			}
 			$className = $this->classNames[$key];

@@ -3,6 +3,7 @@
 use Core\Config\Config;
 use Core\Bracket\LoadAliasClass;
 use Core\Http\HttpRequest;
+use Core\Routing\Router;
 
 /**
  * Ajout de la config et de la requête au container
@@ -31,12 +32,7 @@ LoadAliasClass::getInstance($config['alias'])->check();
 /**
  * Router
  */
-$router = $app['router'];
-
-/**
- * Enregistre les routes
- */
-$router->setRoutes($config['routes']);
+$router = new Router($config['routes']);
 
 /**
  * Enregistre le router de l'application 
