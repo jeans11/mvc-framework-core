@@ -2,5 +2,8 @@
 	"httpRequest":null,
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
-	"httpResponse":"resolveController"
+	"httpResponse":"resolveController",
+	"twigFilesystem":"path.psr0",
+	"twigEnvironment":"twigFilesystem",
+	"view":"twigEnvironment"
 }

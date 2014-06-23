@@ -16,5 +16,14 @@
 	},
 	"Core\\Http\\HttpResponse":{
 		"aliasProvider":"httpResponse"
+	},
+	"\\Twig_Loader_Filesystem":{
+		"aliasProvider":"twigFilesystem"
+	},
+	"\\Twig_Environment":{
+		"aliasProvider":"twigEnvironment"
+	},
+	"Core\\View\\View":{
+		"aliasProvider":"view"
 	}
 }
