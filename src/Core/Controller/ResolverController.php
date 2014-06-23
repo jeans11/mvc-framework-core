@@ -91,6 +91,8 @@ class ResolverController
 	 */
 	public function getInstanceController()
 	{
+		$args = array();
+
 		$class = $this->getReflectionClass($this->getControllerName());
 
 		if ($class->hasMethod('__construct')) {
