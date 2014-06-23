@@ -88,7 +88,7 @@ class Application extends Container
 	{
 		$response = $this['httpResponse'];
 
-		//$response->send();
+		$response->send();
 	}
 }
 

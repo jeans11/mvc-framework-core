@@ -29,7 +29,7 @@ class HttpResponse
 	 */
 	public function send()
 	{
-			
+		$this->handle();	
 	}
 
 	/**
@@ -38,10 +38,11 @@ class HttpResponse
 	private function handle()
 	{
 		$object = $this->resolveController->getInstanceController();
-		$t = call_user_func_array(array(
+		$return = call_user_func_array(array(
 			$object, 
 			$this->resolveController->getMethodName()),
 			$this->resolveController->getMethodParameters()
-		)
+		);
+		return $return;
 	}
 }
