@@ -5,6 +5,13 @@ use Core\Bracket\LoadAliasClass;
 use Core\Http\HttpRequest;
 use Core\Routing\Router;
 use Core\Facades\Facade;
+use Core\Exception\HandlerException;
+
+/**
+ * Permet d'attraper les exceptions
+ * qui ne sont pas attrapée
+ */
+HandlerException::setExceptionHandler();
 
 /**
  * Ajout de la config et de la requête au container

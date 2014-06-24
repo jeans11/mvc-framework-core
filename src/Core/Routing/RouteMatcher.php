@@ -43,6 +43,8 @@ class RouteMatcher
 		if ($route = $this->matchRoute()) {
 			return $route;	
 		}
+
+		throw new RouteException(RouteException::ROUTE_MISSING);
 	}
 
 	/**
