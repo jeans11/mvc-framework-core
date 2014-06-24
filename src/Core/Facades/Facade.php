@@ -1,5 +1,5 @@
 <?php
-namespace Core\Facade;
+namespace Core\Facades;
 
 use Core\Application\Application;
 
@@ -18,7 +18,7 @@ abstract class Facade
 	 *
 	 * @return string
 	 */
-	abstract public static function getProviders()
+	abstract public static function getProviders();
 
 	/**
 	 * Modifie l'instance de l'application
@@ -31,8 +31,29 @@ abstract class Facade
 		static::$app = $app;	
 	}
 
+	/**
+	 * Appel une méthode qui n'existe pas
+	 * statiquement
+	 *
+	 * @param string $action
+	 * @param mixed $args
+	 * @return mixed
+	 */
 	protected static function __callStatic($action, $args)
 	{
-		echo $action;	
+		$object = self::getInstanceOf(static::getProviders());
+		echo $args;
+	}
+
+	/**
+	 * Récupère l'instance du providers
+	 * souhaité
+	 *
+	 * @param string $name
+	 * @return mixed
+	 */
+	protected static function getInstanceOf($name)
+	{
+		return self::$app[$name];
 	}
 }

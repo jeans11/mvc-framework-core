@@ -4,7 +4,7 @@ use Core\Config\Config;
 use Core\Bracket\LoadAliasClass;
 use Core\Http\HttpRequest;
 use Core\Routing\Router;
-use Core\Facade\Facade;
+use Core\Facades\Facade;
 
 /**
  * Ajout de la config et de la requête au container
