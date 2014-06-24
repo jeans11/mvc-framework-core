@@ -29,7 +29,7 @@ class HttpResponse
 	 */
 	public function send()
 	{
-		$this->handle();	
+		exit($this->handle());	
 	}
 
 	/**
