@@ -4,6 +4,7 @@ use Core\Config\Config;
 use Core\Bracket\LoadAliasClass;
 use Core\Http\HttpRequest;
 use Core\Routing\Router;
+use Core\Facade\Facade;
 
 /**
  * Ajout de la config et de la requête au container
@@ -28,6 +29,12 @@ $app->addToClassNames($config['alias']);
  * Charge les alias de classes
  */
 LoadAliasClass::getInstance($config['alias'])->check();
+
+/**
+ * Ajoute l'instance de l'application
+ * pour les facades
+ */
+Facade::setInstanceApp($app);
 
 /**
  * Router
