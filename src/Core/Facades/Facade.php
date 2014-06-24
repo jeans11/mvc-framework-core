@@ -36,13 +36,13 @@ abstract class Facade
 	 * statiquement
 	 *
 	 * @param string $action
-	 * @param mixed $args
+	 * @param array $args
 	 * @return mixed
 	 */
-	protected static function __callStatic($action, $args)
+	public static function __callStatic($action, $args)
 	{
 		$object = self::getInstanceOf(static::getProviders());
-		echo $args;
+		return call_user_func_array(array($object, $action), $args);
 	}
 
 	/**
