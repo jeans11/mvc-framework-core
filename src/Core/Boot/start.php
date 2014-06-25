@@ -8,17 +8,19 @@ use Core\Facades\Facade;
 use Core\Exception\HandlerException;
 
 /**
- * Permet d'attraper les exceptions
- * qui ne sont pas attrapée
- */
-HandlerException::setExceptionHandler();
-
-/**
  * Ajout de la config et de la requête au container
  */
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']));
 
 $app->addInstance('request', new HttpRequest());
+
+$app->addInstance('handlerException', new HandlerException());
+
+/**
+ * Permet d'attraper les exceptions
+ * qui ne sont pas attrapée
+ */
+$app['handlerException']->setExceptionHandler();
 
 /**
  * Charge les bundles

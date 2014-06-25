@@ -3,7 +3,7 @@
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
 	"httpResponse":"resolveController",
-	"twigFilesystem":"path.psr0",
+	"twigFilesystem":["path.psr0", "path.petty"],
 	"twigEnvironment":"twigFilesystem",
 	"view":"twigEnvironment"
 }

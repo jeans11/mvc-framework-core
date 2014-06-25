@@ -1,15 +1,19 @@
 <?php
 namespace Core\Exception;
 
+use Core\Facades\ViewFacade as View;
+
 class HandlerException
 {
-	public static function setExceptionHandler()
+	const VIEW_EXCEPTION = 'Core/Exception/Support/viewException.html';
+
+	public function setExceptionHandler()
 	{
-		set_exception_handler(array(static, 'exceptionHandler'));
+		set_exception_handler(array($this, 'exceptionHandler'));
 	}
 
 	public function exceptionHandler($exception)
 	{
-		exit($exception->getMessage());
+		return View::create(VIEW_EXCEPTION, array('message' => $exception->getMessage()));
 	}
 }
