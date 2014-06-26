@@ -15,7 +15,7 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']));
 
 $app->addInstance('request', new HttpRequest());
 
-$app->instance('twigFilesystem', new Twig_Loader_Filesystem(
+$app->addInstance('twigFilesystem', new Twig_Loader_Filesystem(
 	array(
 		$app['path.psr0'],
 		$app['path.petty']

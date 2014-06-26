@@ -17,8 +17,8 @@
 	"Core\\Http\\HttpResponse":{
 		"aliasProvider":"httpResponse"
 	},
-	"\\Twig_Loader_Filesystem":{
-		"aliasProvider":"twigFilesystem"
+	"Core\\Exception\\HandlerException":{
+		"aliasProvider":"handlerException"
 	},
 	"\\Twig_Environment":{
 		"aliasProvider":"twigEnvironment"

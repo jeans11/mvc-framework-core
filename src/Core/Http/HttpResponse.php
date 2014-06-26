@@ -27,9 +27,13 @@ class HttpResponse
 	 * Envoit la page au navigateur
 	 *
 	 */
-	public function send()
+	public function send($content = null)
 	{
-		exit($this->handle());	
+		if (is_null($content)) {
+			$content = $this->handle();	
+		}
+
+		exit($content);	
 	}
 
 	/**
