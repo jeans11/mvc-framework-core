@@ -37,19 +37,19 @@ class ResolverController
 	public function __construct(RouteMatcher $matcher)
 	{
 		$this->matcher = $matcher;	
-		$this->setRouteMatched();
-		$this->class = $this->getReflectionClass($this->getControllerName());
 	}
 
 	/**
-	 * Retourne le nom du controller
-	 * à invoquer
+	 * Match la route et dispatch
+	 * certains attribut
 	 *
-	 * @return string
+	 * @return void
 	 */
-	public function getControllerName()
+	public function getController()
 	{
-		return $this->routeMatched->controller;	
+		$this->routeMatched = $this->matcher->match();	
+
+		$this->class = $this->getReflectionClass($this->routeMatched->controller());
 	}
 
 	/**
@@ -74,16 +74,6 @@ class ResolverController
 	}
 
 	/**
-	 * Informe de la route matchée
-	 *
-	 * @return void
-	 */
-	private function setRouteMatched()
-	{
-		$this->routeMatched = $this->matcher->match();	
-	}
-
-	/**
 	 * Retourne l'instance du controller
 	 * à invoké.
 	 *
@@ -93,8 +83,8 @@ class ResolverController
 	{
 		$args = array();
 
-		$class = $this->getReflectionClass($this->getControllerName());
-
+		$this->getController();
+		
 		if ($class->hasMethod('__construct')) {
 			$args = $this->getArgsContructeur($class);
 		}
