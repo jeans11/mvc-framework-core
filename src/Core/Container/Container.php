@@ -53,7 +53,7 @@ class Container implements ArrayAccess
 					$param = array_map(array($this,'getParam'), $value);
 					break;
 			}
-			$className = $this->classNames[$key];
+			$className = $this->getClassName($key);
 			$closure = $this->getClosure($key, $className, $param);
 			$this->build($key, $closure);
 		}
@@ -110,6 +110,15 @@ class Container implements ArrayAccess
 		if (array_key_exists($key, $this->contains))	{
 			return $this->contains[$key];
 		}
+	}
+
+	private function getClassName($key)
+	{
+		if (isset($this->classNames[$key])) {
+			return $this->classNames[$key];
+		}
+
+		throw new ContainerException(ContainerException::CLASS_NAME);
 	}
 
 	/**

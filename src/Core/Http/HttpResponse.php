@@ -26,6 +26,8 @@ class HttpResponse
 	/**
 	 * Envoit la page au navigateur
 	 *
+	 * @param string $content
+	 * @return void
 	 */
 	public function send($content = null)
 	{
@@ -37,7 +39,10 @@ class HttpResponse
 	}
 
 	/**
-	 * Effectue le traitement
+	 * Execute le controller et la méthode
+	 * associé
+	 *
+	 * @return mixed
 	 */
 	private function handle()
 	{

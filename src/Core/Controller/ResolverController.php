@@ -49,7 +49,7 @@ class ResolverController
 	{
 		$this->routeMatched = $this->matcher->match();	
 
-		$this->class = $this->getReflectionClass($this->routeMatched->controller());
+		$this->class = $this->getReflectionClass($this->routeMatched->controller);
 	}
 
 	/**
@@ -85,11 +85,11 @@ class ResolverController
 
 		$this->getController();
 		
-		if ($class->hasMethod('__construct')) {
+		if ($this->class->hasMethod('__construct')) {
 			$args = $this->getArgsContructeur($class);
 		}
 
-		return $class->newInstanceArgs($args);
+		return $this->class->newInstanceArgs($args);
 	}
 
 	/**
