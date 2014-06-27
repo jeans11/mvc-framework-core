@@ -13,17 +13,6 @@ class HttpResponse
 	private $resolveController;
 
 	/**
-	 * Crée une nouvelle instance
-	 *
-	 * @param Core\Controller\ResolverController $resolveController
-	 * @return void
-	 */
-	public function __construct(ResolverController $resolveController)
-	{
-		$this->resolveController = $resolveController;	
-	}
-
-	/**
 	 * Envoit la page au navigateur
 	 *
 	 * @param string $content
@@ -53,5 +42,11 @@ class HttpResponse
 			$this->resolveController->getMethodParameters()
 		);
 		return $return;
+	}
+
+	public function setResolverController(ResolverController $resolveController)
+	{
+		$this->resolveController = $resolveController;	
+		return $this;
 	}
 }

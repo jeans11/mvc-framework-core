@@ -2,8 +2,4 @@
 	"httpRequest":null,
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
-	"httpResponse":"resolveController",
-	"twigEnvironment":"twigFilesystem",
-	"view":"twigEnvironment",
-	"handlerException":"httpResponse"
 }
