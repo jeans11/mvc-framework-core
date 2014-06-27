@@ -12,6 +12,10 @@ trait ParseJsonTrait
 	 */
 	public function parseJson($json)
 	{
-		return json_decode(file_get_contents($json), true);
+		if (is_array($tab = json_decode(file_get_contents($json), true))) {
+			return $tab;	
+		}
+
+		throw new ParseJsonException(ParseJsonException::SYNTHAXE_ERROR);
 	}
 }

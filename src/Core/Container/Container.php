@@ -118,7 +118,7 @@ class Container implements ArrayAccess
 			return $this->classNames[$key];
 		}
 
-		throw new ContainerException(ContainerException::CLASS_NAME);
+		throw new ContainerException(sprintf(ContainerException::CLASS_NAME, $key));
 	}
 
 	/**

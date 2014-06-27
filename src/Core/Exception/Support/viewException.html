@@ -1,1 +1,47 @@
-{{message}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Hop... Il y a une erreur !</title>
+	<style type="text/css">
+		
+		#wrap
+		{
+			width:700px;
+			margin:auto;
+		}
+
+		header > h1
+		{
+			color:#bbbbbb;	
+			border-bottom:1px solid #bbbbbb;
+		}
+
+		#erreur
+		{
+			width:100%;	
+			border: 1px solid #bbbbbb;
+		}
+
+		#erreur > p
+		{
+			font-family:arial;
+			font-style:italic;
+			font-size:20px;
+			color:#e74c3c;
+			text-align:center;
+		}
+
+	</style>
+</head>
+	<body>
+		<div id="wrap">
+			<header>
+				<h1>Hop... Il y a une erreur !</h1>
+			</header>
+			<div id="erreur">
+				<p>{{message}}</p>
+			</div>
+		</div>
+	</body>
+</html>

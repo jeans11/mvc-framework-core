@@ -29,18 +29,6 @@ class Application extends Container
 	 */
 	public function addToClassNames($alias = array())
 	{
-		/*$classes = array(
-			'Core\Application\Application' => array(
-				'aliasProvider' => 'app'
-			),
-			'Core\Http\HttpRequest' => array(
-				'aliasProvider'	=> 'httpRequest'
-			),
-			'Core\Routing\Router' => array(
-				'aliasProvider'	=> 'router'
-			)
-		);
-*/
 		$classes = $this->parseJson(__DIR__.'/../Config/alias.json');
 
 		foreach (array_merge($classes, $alias) as $key => $value) {

@@ -109,7 +109,7 @@ class Route
 	private function replaceParams()
 	{
 		foreach ($this->paramsName as $param) {
-			$this->url = preg_replace('/\{'.$param.'\}/', '('.(string) RegExFactory::get($this->where[$param]).')', $this->url);
+			$this->url = preg_replace('/\{'.$param.'\}/', '('.(string) RegExFactory::get($this->getWhere($param)).')', $this->url);
 		}		
 	}
 
@@ -153,5 +153,14 @@ class Route
 		}
 
 		return $paramsValue;
+	}
+
+	private function getWhere($key)
+	{
+		if (isset($this->where[$key])) {
+			return $this->where[$key];
+		}
+
+		throw new RouteException(sprintf(RouteException::PARAMETRE_ERREUR, $key));
 	}
 }

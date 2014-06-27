@@ -10,8 +10,15 @@ use Core\Facades\Facade;
  */
 Facade::setInstanceApp($app);
 
-require '../Config/addInstance.php';
+/**
+ * Ajout de certaines classe au container
+ */
+require __DIR__.'/../Config/addInstance.php';
 
+/**
+ * Attrape les exceptions qui ne sont pas
+ * attrapée
+ */
 $app['handlerException']->setExceptionHandler();
 
 /**
@@ -22,7 +29,7 @@ $config = $app['config'];
 $config['bundle'];
 
 /* 
- * Ajoute certains services au container
+ * Ajoute les alias des classes
  */
 $app->addToClassNames($config['alias']);
 
@@ -45,11 +52,4 @@ $app->addInstance('router', $router);
  * Résout les dépendances
  */
 $app->solvesDependencies($config['providers']);
-
-/**
- * Permet d'attraper les exceptions
- * qui ne sont pas attrapée
- */
-$app['handlerException']->setExceptionHandler();
-
 
