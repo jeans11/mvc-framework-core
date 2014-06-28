@@ -49,7 +49,16 @@ class ResolverController
 	{
 		$this->routeMatched = $this->matcher->match();	
 
-		$this->class = $this->getReflectionClass($this->routeMatched->controller);
+		if (class_exists($this->routeMatched->controller)) {
+			$this->class = $this->getReflectionClass($this->routeMatched->controller);
+		} else {
+			$message = sprintf(
+				ControllerException::CONTROLLER_ERROR,
+				$this->routeMatched->controller
+			);
+
+			throw new ControllerException($message);
+		}
 	}
 
 	/**
@@ -107,9 +116,16 @@ class ResolverController
 			foreach ($method->getParameters() as $param) {
 				$paramsValue[] = $this->routeMatched->paramsValue[$param->name];
 			}
+			return $paramsValue;
 		}
 
-		return $paramsValue;
+		$message = sprintf(
+			ControllerException::METHOD_ERROR,
+			$this->class->getName(),
+			$this->getMethodName()	
+		);
+
+		throw new ControllerException($message);
 	}
 
 	/**
