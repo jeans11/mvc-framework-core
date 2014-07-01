@@ -2,18 +2,19 @@
 
 use Core\Bracket\LoadAliasClass;
 use Core\Routing\Router;
-use Core\Facades\Facade;
-
-/**
- * Ajoute l'instance de l'application
- * pour les facades
- */
-Facade::setInstanceApp($app);
+use Core\Boot\Booted;
 
 /**
  * Ajout de certaines classe au container
  */
 require __DIR__.'/../Config/addInstance.php';
+
+/**
+ * Crée le booteur
+ */
+$boot = Booted::getInstance($app);
+
+$boot->registerAppFacade();
 
 /**
  * Attrape les exceptions qui ne sont pas
