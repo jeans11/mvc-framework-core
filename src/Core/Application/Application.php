@@ -6,6 +6,8 @@ use Core\Routing\Router;
 use Core\Routing\RouteMatcher;
 use Core\Http\HttpRequest;
 use Core\Controller\ResolverController;
+use Doctrine\ORM\Tools\Setup;
+use Doctrine\ORM\EntityManager;
 
 class Application extends Container
 {
@@ -79,6 +81,26 @@ class Application extends Container
 		$response
 			->setResolverController($this['resolveController'])
 			->send();
+	}
+
+	/**
+	 * Configuration de Doctrine
+	 *
+	 * @return Doctrine\ORM\EntityManager
+	 */
+	public function setupDoctrine()
+	{
+		$setup = Setup::createAnnotationMetadataConfiguration(array($this['path.app']), false);
+
+		$database = $this['config']['database'];
+
+		$defaultDriver = $database['default'];
+
+		return EntityManager::create(
+			$database['connections'][$defaultDriver],
+			$setup
+		);
+		
 	}
 }
 
