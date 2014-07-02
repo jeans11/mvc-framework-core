@@ -5,6 +5,6 @@ class Args
 {
 	public static function getOptions()
 	{
-		return $argv;	
+		return array_slice($_SERVER['argv'], 1);	
 	}
 }
