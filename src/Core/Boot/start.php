@@ -23,7 +23,10 @@ Facade::setInstanceApp($app);
  */
 $app['handlerException']->setExceptionHandler();
 
-$app->attach($this['appConsole']);
+/**
+ * On attache des observateurs sur l'application
+ */
+$app->attach($app['appConsole']);
 
 /**
  * Charge les bundles

@@ -4,6 +4,7 @@ namespace Core\Exception;
 use Core\Http\HttpResponse;
 use Core\Facades\ViewFacade as View;
 use SplObserver;
+use SplSubject;
 
 class HandlerException implements SplObserver
 {
@@ -91,8 +92,8 @@ class HandlerException implements SplObserver
 		return $return;
 	}
 
-	public function update(SplObserver $observer)
+	public function update(SplSubject $obj)
 	{
-		static::$env = $observer->getEnv();	
+		static::$env = $obj->getEnv();	
 	}
 }
