@@ -8,8 +8,10 @@ use Core\Http\HttpRequest;
 use Core\Controller\ResolverController;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use SplSubject;
+use SplObserver;
 
-class Application extends Container
+class Application extends Container implements SplSubject
 {
 	/**
 	 * Appel de certains traits
@@ -17,11 +19,18 @@ class Application extends Container
 	use \Core\Bracket\Traits\ParseJsonTrait;
 
 	/**
-	 * Instance du router
+	 * Observers
 	 *
-	 * @var Core\Routing\Router
+	 * @var array
 	 */
-	private $router;
+	private static $observers = array();
+
+	/**
+	 * Environnement de lancement
+	 *
+	 * @var string
+	 */
+	private static $env;
 
 	/**
 	 * Ajoute les services au container 
@@ -65,10 +74,12 @@ class Application extends Container
 	 *
 	 * @param string $key
 	 * @param mixed $instance
+	 * @return Core\Application\Application
 	 */
 	public function addInstance($key, $instance)
 	{
 		$this[$key] = $instance;
+		return $this;
 	}
 
 	/**
@@ -76,11 +87,20 @@ class Application extends Container
 	 */
 	public function run()
 	{
+		$this->setEnv('http');
+
 		$response = $this['httpResponse'];
 
 		$response
 			->setResolverController($this['resolveController'])
 			->send();
+	}
+
+	public function runConsole()
+	{
+		$this->setEnv('console');
+
+		$this['appConsole']->run();
 	}
 
 	/**
@@ -100,7 +120,63 @@ class Application extends Container
 			$database['connections'][$defaultDriver],
 			$setup
 		);
-		
 	}
+
+	/**
+	 * Ajoute un observateur
+	 *
+	 * @param SplObserver $observer
+	 * @return void
+	 */
+	public function attach(SplObserver $observer)
+	{
+		static::$observers[] = $observer;
+	}
+
+	/**
+	 * Supprime un observateur
+	 * @param SplObserver $observer
+	 * @return void
+	 */
+	public function detach(SplObserver $observer)
+	{
+		unset(static::$observer[$observer]);
+	}
+
+	/**
+	 * Notifie les observateurs
+	 *
+	 * @return void
+	 */
+	public function notify()
+	{
+		foreach (static::$observers as $observer) {
+			$observer->update($this);
+		}
+	}
+
+	/**
+	 * Modifie l'environnement
+	 *
+	 * @param string $value
+	 * @return void
+	 */
+	public function setEnv($value)
+	{
+		static::$env = $value;	
+		$this->notify();
+	}
+
+	/**
+	 * Retourne l'environnement
+	 * courant
+	 *
+	 * @return string
+	 */
+	public function getEnv()
+	{
+		return static::$env;	
+	}
+
 }
 

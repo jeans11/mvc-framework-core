@@ -7,23 +7,19 @@ use Core\Exception\HandlerException;
 use \Twig_Loader_Filesystem;
 use \Twig_Environment;
 use Core\View\View;
+use Core\Console\AppConsole;
 
-$app->addInstance('config', new Config($app['path.config'], $app['path.psr0']));
-
-$app->addInstance('request', new HttpRequest());
-
-$app->addInstance('httpResponse', new HttpResponse());
-
-$app->addInstance('twigFilesystem', new Twig_Loader_Filesystem(
-	array(
-		$app['path.psr0'],
-		$app['path.petty']
-	)
-));
-
-$app->addInstance('twigEnvironment', new Twig_Environment($app['twigFilesystem']));
- 
-$app->addInstance('view', new View($app['twigEnvironment']));
-
-$app->addInstance('handlerException', new HandlerException($app['httpResponse']));
+$app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
+	->addInstance('request', new HttpRequest())
+	->addInstance('httpResponse', new HttpResponse())
+	->addInstance('twigFilesystem', new Twig_Loader_Filesystem(
+		array(
+			$app['path.psr0'],
+			$app['path.petty']
+		)
+	))
+	->addInstance('twigEnvironment', new Twig_Environment($app['twigFilesystem']))
+	->addInstance('view', new View($app['twigEnvironment']))
+	->addInstance('handlerException', new HandlerException($app['httpResponse']))
+	->addInstance('appConsole', new AppConsole());
 

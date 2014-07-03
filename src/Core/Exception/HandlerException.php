@@ -3,8 +3,9 @@ namespace Core\Exception;
 
 use Core\Http\HttpResponse;
 use Core\Facades\ViewFacade as View;
+use SplObserver;
 
-class HandlerException
+class HandlerException implements SplObserver
 {
 	/**
 	 * Affichage des erreurs
@@ -19,6 +20,13 @@ class HandlerException
 	 * @var Core\Http\HttpResponse
 	 */
 	private $response;
+
+	/**
+	 * Environnement de lancement
+	 *
+	 * @var string
+	 */
+	private static $env;
 
 	/**
 	 * Crée une instance
@@ -64,11 +72,27 @@ class HandlerException
 	 */
 	private function prepareContent($exception)
 	{
-		return View::create(
-			static::$view, 
-			array(
-				'message' => $exception->getMessage()
-			)
-		);
+		$return = "";
+
+		switch(static::$env) {
+			case 'http':
+				$return = View::create(
+					static::$view, 
+					array(
+						'message' => $exception->getMessage()
+					)
+				);
+				break;
+			case 'console':
+				$return = $exception->getMessage();
+				break;
+		}
+
+		return $return;
+	}
+
+	public function update(SplObserver $observer)
+	{
+		static::$env = $observer->getEnv();	
 	}
 }

@@ -23,6 +23,8 @@ Facade::setInstanceApp($app);
  */
 $app['handlerException']->setExceptionHandler();
 
+$app->attach($this['appConsole']);
+
 /**
  * Charge les bundles
  */
