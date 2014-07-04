@@ -1,6 +1,8 @@
 <?php
 namespace Core\Console\Command;
 
+use Core\Facades\ApplicationFacade as App;
+
 class CreateBundle
 {
 	private $name;
@@ -18,7 +20,13 @@ class CreateBundle
 
 	public function execute()
 	{
-		mkdir('/home/jean/Documents/www-dev/lab/petty_archi/app/Lib/'.$this->name);
+		$pathBundle = App::get('path.psr0').'/'.$this->name;
+
+		mkdir($pathBundle);
+
+		foreach ($this->folders as $folder) {
+			mkdir($pathBundle.'/'.$folder);
+		}
 	}
 
 

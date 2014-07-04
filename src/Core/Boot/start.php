@@ -60,3 +60,7 @@ $app->addInstance('router', $router);
  */
 $app->solvesDependencies($config['providers']);
 
+/**
+ * Ajout de l'application au container
+ */
+$app->addInstance('app', $app);

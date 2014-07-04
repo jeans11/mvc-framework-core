@@ -178,5 +178,17 @@ class Application extends Container implements SplSubject
 		return static::$env;	
 	}
 
+	/**
+	 * Retourne la valeur en fonction
+	 * de la clé
+	 *
+	 * @param string $key
+	 * @return mixed
+	 */
+	public function get($key)
+	{
+		return $this->make($key);
+	}
+
 }
 
