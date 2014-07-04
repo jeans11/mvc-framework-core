@@ -22,6 +22,8 @@ class AppConsole
 		$options = Args::getOptions();
 
 		$object = $this->getCommandInstance($options);
+
+		$object->execute();
 	}
 
 	/**
@@ -33,7 +35,7 @@ class AppConsole
 	private function getCommandInstance($options)
 	{
 		if (isset(static::$commands[$options[0]])) {
-			return new static::$commands[$options[0]];
+			return new static::$commands[$options[0]]($options[1]);
 		}
 
 		throw new ConsoleException(ConsoleException::INVALID_ARG);
