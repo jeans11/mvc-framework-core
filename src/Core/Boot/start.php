@@ -26,7 +26,7 @@ $app['handlerException']->setExceptionHandler();
 /**
  * On attache des observateurs sur l'application
  */
-$app->attach($app['appConsole']);
+$app->attach($app['handlerException']);
 
 /**
  * Charge les bundles

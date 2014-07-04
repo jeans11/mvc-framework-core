@@ -3,6 +3,7 @@ namespace Core\Exception;
 
 use Core\Http\HttpResponse;
 use Core\Facades\ViewFacade as View;
+use Core\Console\Output\ErrorOutput;
 use SplObserver;
 use SplSubject;
 
@@ -85,7 +86,7 @@ class HandlerException implements SplObserver
 				);
 				break;
 			case 'console':
-				$return = $exception->getMessage();
+				$return = new ErrorOutput($exception->getMessage());
 				break;
 		}
 
