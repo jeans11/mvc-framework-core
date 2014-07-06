@@ -9,7 +9,7 @@ class AppConsole
 	 * @var array
 	 */
 	private static $commands = array(
-		'create:bundle' => '\Core\Console\Commands\CreateBundle'
+		'create:bundle' => '\Core\Console\Command\CreateBundle'
 	);
 
 	/**

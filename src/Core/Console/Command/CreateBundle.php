@@ -5,19 +5,39 @@ use Core\Facades\ApplicationFacade as App;
 
 class CreateBundle extends Command
 {
+	/**
+	 * Nom de la commande
+	 */
 	const COMMAND_NAME = "create:bundle";
 
+	/**
+	 * Tableau caractérisant l'architecture
+	 * d'un bundle
+	 *
+	 * @var array
+	 */
 	private $folders = array(
 		'Controllers',
 		'config',
 		'views'
 	);
 
+	/**
+	 * Crée une nouvel instance
+	 *
+	 * @param array $options
+	 * @return void
+	 */
 	public function __construct($options)
 	{
-		parent::__construct($options)	
+		parent::__construct($options);
 	}
 
+	/**
+	 * Excécute la commande
+	 *
+	 * @return void
+	 */
 	public function execute()
 	{
 		$pathBundle = App::get('path.psr0').'/'.$this->getBundleName();
@@ -29,6 +49,12 @@ class CreateBundle extends Command
 		}
 	}
 
+	/**
+	 * Retourne le nom du bundle
+	 * à créer
+	 *
+	 * @return string
+	 */
 	public function getBundleName()
 	{
 		if (isset($this->options[1])) {
