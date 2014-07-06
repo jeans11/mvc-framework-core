@@ -35,7 +35,7 @@ class AppConsole
 	private function getCommandInstance($options)
 	{
 		if (isset(static::$commands[$options[0]])) {
-			return new static::$commands[$options[0]]($options[1]);
+			return new static::$commands[$options[0]]($options);
 		}
 
 		throw new ConsoleException(ConsoleException::INVALID_ARG);

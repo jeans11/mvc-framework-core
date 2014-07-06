@@ -3,9 +3,9 @@ namespace Core\Console\Command;
 
 use Core\Facades\ApplicationFacade as App;
 
-class CreateBundle
+class CreateBundle extends Command
 {
-	private $name;
+	const COMMAND_NAME = "create:bundle";
 
 	private $folders = array(
 		'Controllers',
@@ -13,14 +13,14 @@ class CreateBundle
 		'views'
 	);
 
-	public function __construct($name)
+	public function __construct($options)
 	{
-		$this->name = $name;	
+		parent::__construct($options)	
 	}
 
 	public function execute()
 	{
-		$pathBundle = App::get('path.psr0').'/'.$this->name;
+		$pathBundle = App::get('path.psr0').'/'.$this->getBundleName();
 
 		mkdir($pathBundle);
 
@@ -29,5 +29,16 @@ class CreateBundle
 		}
 	}
 
-
+	public function getBundleName()
+	{
+		if (isset($this->options[1])) {
+			return $this->options[1];
+		}
+		
+		$message = sprintf(
+			CommandException::MISSING_ARG,
+			self::COMMAND_NAME
+		);
+		throw new CommandException($message);
+	}
 }
