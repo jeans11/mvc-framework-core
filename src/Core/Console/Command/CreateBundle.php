@@ -2,6 +2,7 @@
 namespace Core\Console\Command;
 
 use Core\Facades\ApplicationFacade as App;
+use Core\Facades\HttpResponseFacade as Response;
 
 class CreateBundle extends Command
 {
@@ -47,6 +48,10 @@ class CreateBundle extends Command
 		foreach ($this->folders as $folder) {
 			mkdir($pathBundle.'/'.$folder);
 		}
+
+		Response::send(
+			new ValidOutput('Le bundle a bien été crée');
+		);
 	}
 
 	/**
