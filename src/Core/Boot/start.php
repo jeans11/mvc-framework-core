@@ -10,6 +10,16 @@ use Core\Facades\Facade;
 require __DIR__.'/../Config/addInstance.php';
 
 /**
+ * On attache des observateurs sur l'application
+ */
+$app['env']->attach($app['handlerException']);
+
+/**
+ * Diffuse l'environnement de lancement
+ */
+$app['env']->spill();
+
+/**
  * Ajoute l'instance de l'application
  * pour les facades
  *
@@ -22,11 +32,6 @@ Facade::setInstanceApp($app);
  * attrapée
  */
 $app['handlerException']->setExceptionHandler();
-
-/**
- * On attache des observateurs sur l'application
- */
-$app->attach($app['handlerException']);
 
 /**
  * Charge les bundles

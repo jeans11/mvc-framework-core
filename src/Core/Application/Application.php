@@ -8,29 +8,13 @@ use Core\Http\HttpRequest;
 use Core\Controller\ResolverController;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
-use SplSubject;
-use SplObserver;
 
-class Application extends Container implements SplSubject
+class Application extends Container
 {
 	/**
 	 * Appel de certains traits
 	 */
 	use \Core\Bracket\Traits\ParseJsonTrait;
-
-	/**
-	 * Observers
-	 *
-	 * @var array
-	 */
-	private static $observers = array();
-
-	/**
-	 * Environnement de lancement
-	 *
-	 * @var string
-	 */
-	private static $env;
 
 	/**
 	 * Ajoute les services au container 
@@ -87,8 +71,6 @@ class Application extends Container implements SplSubject
 	 */
 	public function run()
 	{
-		$this->setEnv('http');
-
 		$response = $this['httpResponse'];
 
 		$response
@@ -98,8 +80,6 @@ class Application extends Container implements SplSubject
 
 	public function runConsole()
 	{
-		$this->setEnv('console');
-
 		$this['appConsole']->run();
 	}
 
@@ -120,62 +100,6 @@ class Application extends Container implements SplSubject
 			$database['connections'][$defaultDriver],
 			$setup
 		);
-	}
-
-	/**
-	 * Ajoute un observateur
-	 *
-	 * @param SplObserver $observer
-	 * @return void
-	 */
-	public function attach(SplObserver $observer)
-	{
-		static::$observers[] = $observer;
-	}
-
-	/**
-	 * Supprime un observateur
-	 * @param SplObserver $observer
-	 * @return void
-	 */
-	public function detach(SplObserver $observer)
-	{
-		unset(static::$observer[$observer]);
-	}
-
-	/**
-	 * Notifie les observateurs
-	 *
-	 * @return void
-	 */
-	public function notify()
-	{
-		foreach (static::$observers as $observer) {
-			$observer->update($this);
-		}
-	}
-
-	/**
-	 * Modifie l'environnement
-	 *
-	 * @param string $value
-	 * @return void
-	 */
-	public function setEnv($value)
-	{
-		static::$env = $value;	
-		$this->notify();
-	}
-
-	/**
-	 * Retourne l'environnement
-	 * courant
-	 *
-	 * @return string
-	 */
-	public function getEnv()
-	{
-		return static::$env;	
 	}
 
 	/**

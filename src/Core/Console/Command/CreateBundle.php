@@ -3,6 +3,7 @@ namespace Core\Console\Command;
 
 use Core\Facades\ApplicationFacade as App;
 use Core\Facades\HttpResponseFacade as Response;
+use Core\Console\Output\ValidOutput;
 
 class CreateBundle extends Command
 {
@@ -50,7 +51,7 @@ class CreateBundle extends Command
 		}
 
 		Response::send(
-			new ValidOutput('Le bundle a bien été crée');
+			new ValidOutput('Le bundle a bien été crée')
 		);
 	}
 

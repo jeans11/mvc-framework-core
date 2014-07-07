@@ -8,6 +8,8 @@ use \Twig_Loader_Filesystem;
 use \Twig_Environment;
 use Core\View\View;
 use Core\Console\AppConsole;
+use Core\Console\Args;
+use Core\Config\Environment;
 
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('request', new HttpRequest())
@@ -21,5 +23,7 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('twigEnvironment', new Twig_Environment($app['twigFilesystem']))
 	->addInstance('view', new View($app['twigEnvironment']))
 	->addInstance('handlerException', new HandlerException($app['httpResponse']))
-	->addInstance('appConsole', new AppConsole());
+	->addInstance('appConsole', new AppConsole())
+	->addInstance('args', new Args())
+	->addInstance('env', new Environment($app['args']->getArgv()));
 
