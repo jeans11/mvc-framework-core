@@ -90,7 +90,7 @@ class Application extends Container
 	 */
 	public function setupDoctrine()
 	{
-		$setup = Setup::createAnnotationMetadataConfiguration(array($this['path.app']), false);
+		$setup = Setup::createAnnotationMetadataConfiguration(array($this['path.psr0']), false);
 
 		$database = $this['config']['database'];
 

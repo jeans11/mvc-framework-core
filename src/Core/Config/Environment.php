@@ -26,7 +26,7 @@ class Environment implements SplSubject
 	 * @param array $args
 	 * @return void
 	 */
-	private function setEnv($args)
+	public function setEnv($args)
 	{
 		if (empty($args)) {
 			static::$env = 'http';

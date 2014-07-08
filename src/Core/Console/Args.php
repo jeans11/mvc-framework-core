@@ -5,7 +5,7 @@ class Args
 {
 	public static function getOptions()
 	{
-		$args = array_slice($this->getArgv(), 1);	
+		$args = array_slice(self::getArgv(), 1);	
 
 		if (!empty($args)) {
 			return $args;		
