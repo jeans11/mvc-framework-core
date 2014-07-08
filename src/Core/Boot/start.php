@@ -10,9 +10,14 @@ use Core\Facades\Facade;
 require __DIR__.'/../Config/addInstance.php';
 
 /**
- * On attache des observateurs sur l'application
+ * On attache des observateurs sur l'environnement
  */
 $app['env']->attach($app['handlerException']);
+
+/**
+ * Détection de l'environnement
+ */
+$app['env']->setEnv($app['args']->getArgv());
 
 /**
  * Diffuse l'environnement de lancement

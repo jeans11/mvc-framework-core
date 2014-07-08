@@ -21,16 +21,6 @@ class Environment implements SplSubject
 	private static $observers = array();
 
 	/**
-	 * Crée une instance
-	 *
-	 * @return void
-	 */
-	public function __construct($args)
-	{
-		$this->setEnv($args);	
-	}
-
-	/**
 	 * Modifie l'environnement de lancement
 	 *
 	 * @param array $args

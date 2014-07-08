@@ -25,5 +25,5 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('handlerException', new HandlerException($app['httpResponse']))
 	->addInstance('appConsole', new AppConsole())
 	->addInstance('args', new Args())
-	->addInstance('env', new Environment($app['args']->getArgv()));
+	->addInstance('env', new Environment());
 
