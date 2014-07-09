@@ -95,7 +95,7 @@ class ResolverController
 		$this->getController();
 		
 		if ($this->class->hasMethod('__construct')) {
-			$args = $this->getArgsContructeur($class);
+			$args = $this->getArgsContructeur();
 		}
 
 		return $this->class->newInstanceArgs($args);
@@ -133,15 +133,14 @@ class ResolverController
 	 * les arguments que le controller
 	 * à besoin d'invoquer 
 	 *
-	 * @param RelectionClass
 	 * @return array
 	 */
-	private function getArgsConstructeur($class)
+	private function getArgsConstructeur()
 	{
-		$constructeur = $class->getConstructor();	
+		$constructeur = $this->class->getConstructor();	
 		
 		foreach ($constructeur->getParameters() as $params) {
-				
+			var_dump($params);
 		}
 	}
 }

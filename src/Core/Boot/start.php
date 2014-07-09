@@ -3,7 +3,7 @@
 use Core\Bracket\LoadAliasClass;
 use Core\Routing\Router;
 use Core\Facades\Facade;
-use Core\Controller\Controller;
+use Core\Manager\Manager;
 
 /**
  * Ajout de certaines classe au container
@@ -35,9 +35,9 @@ Facade::setInstanceApp($app);
 
 /**
  * Ajoute l'instance de EntityManager
- * au Controller général
+ * au Manager général
  */
-Controller::setEntityManager($app->setupDoctrine());
+Manager::setEntityManager($app->setupDoctrine());
 
 /**
  * Attrape les exceptions qui ne sont pas
