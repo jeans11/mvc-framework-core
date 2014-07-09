@@ -3,6 +3,7 @@
 use Core\Bracket\LoadAliasClass;
 use Core\Routing\Router;
 use Core\Facades\Facade;
+use Core\Controller\Controller;
 
 /**
  * Ajout de certaines classe au container
@@ -31,6 +32,12 @@ $app['env']->spill();
  * @return void
  */
 Facade::setInstanceApp($app);
+
+/**
+ * Ajoute l'instance de EntityManager
+ * au Controller général
+ */
+Controller::setEntityManager($app->setupDoctrine());
 
 /**
  * Attrape les exceptions qui ne sont pas
