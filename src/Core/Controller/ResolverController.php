@@ -97,7 +97,7 @@ class ResolverController
 		$this->getController();
 		
 		if ($this->class->hasMethod('__construct')) {
-			$args = $this->getArgsContructeur();
+			$args = $this->getArgsConstructeur();
 		}
 
 		return $this->class->newInstanceArgs($args);
@@ -155,8 +155,10 @@ class ResolverController
 		
 		foreach ($constructeur->getParameters() as $param) {
 			$class = $param->getClass();
-			$args[] = $class->newInstanceArgs($this->getArgsContructeur($class));
+			$args[] = $class->newInstanceArgs($this->getArgsConstructeur($class));
 		}
+
+		return $args;
 	}
 
 	/**
