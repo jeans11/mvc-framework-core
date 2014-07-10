@@ -2,6 +2,8 @@
 namespace Core\Controller;
 
 use Core\Routing\RouteMatcher;
+use ReflectionClass;
+use ReflectionMethod;
 
 class ResolverController
 { 
@@ -131,17 +133,59 @@ class ResolverController
 	/**
 	 * Retourne sous forme de tableau
 	 * les arguments que le controller
-	 * à besoin d'invoquer 
-	 *
+	 * à besoin d'invoquer. Appeler de
+	 * façon récurssive
+	 * 
+	 * @param mixed
 	 * @return array
 	 */
-	private function getArgsConstructeur()
+	private function getArgsConstructeur(ReflectionClass $reflection = null)
 	{
-		$constructeur = $this->class->getConstructor();	
-		
-		foreach ($constructeur->getParameters() as $params) {
-			var_dump($params);
+		$args = array();
+
+		// Retourne une instance de ReflectionMethod
+		// ou NULL dans le cas où la classe n'a pas de
+		// constructeur
+		$constructeur = $this->getConstructeur($reflection);
+
+		// Vérifie s'il s'agit bien d'une ReflectionMethod
+		if (!$this->isConstructeur($constructeur)) {
+			return $args;
 		}
+		
+		foreach ($constructeur->getParameters() as $param) {
+			$class = $param->getClass();
+			$args[] = $class->newInstanceArgs($this->getArgsContructeur($class));
+		}
+	}
+
+	/**
+	 * Retourne une instance de ReflectionMethod
+	 *
+	 * @param mixed
+	 * @return ReflectionMethod
+	 */
+	private function getConstructeur($reflection)
+	{
+		if (is_null($reflection)) {
+			$constructeur = $this->class->getConstructor();
+		} else {
+			$constructeur = $reflection->getConstructor();	
+		}
+
+		return $constructeur;
+	}
+
+	/**
+	 * Vérifie si l'argument est de type
+	 * ReflectionMethod
+	 *
+	 * @param mixed
+	 * @return boolean
+	 */
+	private function isConstructeur($constructeur)
+	{
+		return $constructeur instanceof ReflectionMethod;	
 	}
 }
 
