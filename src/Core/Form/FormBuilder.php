@@ -2,7 +2,6 @@
 namespace Core\Form;
 
 use PFBC\Form;
-use PFBC\Element;
 use Core\Form\FormElementsInterface;
 
 class FormBuilder
@@ -22,20 +21,24 @@ class FormBuilder
 			'method' => $method
 		));
 		
-		$this->addToFrom($elements);
+		$this->addToForm($elements);
 
 		return $this->form;
 	}
 
-	private addToForm($elements)
+	private function addToForm($elements)
 	{
-		foreach ($elements as $class => $options) {
-			$this->form->addElement($this->getInstanceElement($class, $options));
+		foreach ($elements as $element) {
+			$this->form->addElement($this->getInstanceElement($element));
 		}
 	}
 
-	private function getInstanceElement($class, $options)
+	private function getInstanceElement($element)
 	{
-		return new 'Element\\'.ucfirst($class)($options[0], $options[1]);
+		$class = 'PFBC\\Element\\'.ucfirst($element['type']);
+		return new $class(
+			$element['label'],
+			$element['name']
+		);
 	}
 }
