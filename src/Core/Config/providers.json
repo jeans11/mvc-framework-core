@@ -1,5 +1,7 @@
 {
 	"httpRequest":null,
 	"routeMatcher":["router","httpRequest"],
-	"resolveController":"routeMatcher"
+	"resolveController":"routeMatcher",
+	"form":null,
+	"formBuilder":"form"
 }
