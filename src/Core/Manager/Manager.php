@@ -29,5 +29,8 @@ abstract class Manager
 		return static::$entityManager;	
 	}
 
+	/**
+	 * Ajout d'une ressource
+	 */
 	abstract public function add();
 }

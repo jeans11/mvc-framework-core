@@ -6,6 +6,13 @@ use Core\Facades\Facade;
 use Core\Manager\Manager;
 
 /**
+ * Démarre la session
+ * Nécessaire pour l'utilisation
+ * de la librairie PFBC
+ */
+session_start();
+
+/**
  * Ajout de certaines classe au container
  */
 require __DIR__.'/../Config/addInstance.php';
