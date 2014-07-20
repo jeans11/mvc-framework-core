@@ -32,5 +32,5 @@ abstract class Manager
 	/**
 	 * Ajout d'une ressource
 	 */
-	abstract public function add();
+	abstract public function add($values);
 }
