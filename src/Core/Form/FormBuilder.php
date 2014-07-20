@@ -68,9 +68,21 @@ class FormBuilder
 	private function getInstanceElement($element)
 	{
 		$class = 'PFBC\\Element\\'.ucfirst($element['type']);
-		return new $class(
-			$element['label'],
-			$element['name']
-		);
+
+		switch ($element['type']) {
+			case 'checkbox':
+				return new $class(
+					$element['label'],
+					$element['name'],
+					$element['options']
+				);
+				break;
+			default:
+				return new $class(
+					$element['label'],
+					$element['name']
+				);
+				break;
+		}
 	}
 }
