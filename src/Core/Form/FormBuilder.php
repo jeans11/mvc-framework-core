@@ -38,7 +38,7 @@ class FormBuilder
 			'action' => $action,
 			'id' => $id,
 			'method' => $method,
-			'prevent' => array('bootstrap', 'jquery')
+			'prevent' => array('bootstrap', 'jQuery')
 		));
 		
 		$this->addToForm($elements);
