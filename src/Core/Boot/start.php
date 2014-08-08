@@ -17,6 +17,8 @@ session_start();
  */
 require __DIR__.'/../Config/addInstance.php';
 
+$app->addToTwig();
+
 /**
  * On attache des observateurs sur l'environnement
  */

@@ -102,6 +102,13 @@ class Application extends Container
 		);
 	}
 
+	public function addToTwig()
+	{
+		foreach ($this as $key => $value) {
+			echo $key;	
+		}
+	}
+
 	/**
 	 * Retourne la valeur en fonction
 	 * de la clé
