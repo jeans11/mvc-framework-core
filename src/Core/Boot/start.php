@@ -17,6 +17,9 @@ session_start();
  */
 require __DIR__.'/../Config/addInstance.php';
 
+/**
+ * Ajout des services pour Twig
+ */
 $app->addToTwig();
 
 /**

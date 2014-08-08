@@ -102,10 +102,17 @@ class Application extends Container
 		);
 	}
 
+	/**
+	 * Ajoute certains services à Twig
+	 *
+	 * @return void
+	 */
 	public function addToTwig()
 	{
-		foreach ($this as $key => $value) {
-			echo $key;	
+		foreach ($this->contains as $key => $value) {
+			if (preg_match('/twig\/./', $key)) {
+				$this['twigEnvironment']->addGlobal($key, $value);
+			}
 		}
 	}
 
