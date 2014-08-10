@@ -10,6 +10,7 @@ use Core\View\View;
 use Core\Console\AppConsole;
 use Core\Console\Args;
 use Core\Config\Environment;
+use Core\Bracket\Twig\UrlCreator;
 
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('request', new HttpRequest())
@@ -25,5 +26,6 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('handlerException', new HandlerException($app['httpResponse']))
 	->addInstance('appConsole', new AppConsole())
 	->addInstance('args', new Args())
-	->addInstance('env', new Environment());
+	->addInstance('env', new Environment())
+	->addInstance('twig.url', new UrlCreator());
 
