@@ -110,8 +110,9 @@ class Application extends Container
 	public function addToTwig()
 	{
 		foreach ($this->contains as $key => $value) {
-			if (preg_match('/twig\/./', $key)) {
-				$this['twigEnvironment']->addGlobal($key, $value);
+			if (preg_match('/twig\./', $key)) {
+				$key = explode('.',$key);
+				$this['twigEnvironment']->addGlobal($key[1], $value);
 			}
 		}
 	}
