@@ -58,7 +58,7 @@ class RouteMatcher
 	{
 		$request = $this->request->uri();
 
-		if (!is_null($routeName)) {
+		if (!empty($routeName)) {
 			$request = $routeName;			
 		}
 
