@@ -3,5 +3,6 @@
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
 	"form":null,
-	"formBuilder":"form"
+	"formBuilder":"form",
+	"twig.route":"resolveController"
 }

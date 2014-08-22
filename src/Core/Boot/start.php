@@ -18,11 +18,6 @@ session_start();
 require __DIR__.'/../Config/addInstance.php';
 
 /**
- * Ajout des services pour Twig
- */
-$app->addToTwig();
-
-/**
  * On attache des observateurs sur l'environnement
  */
 $app['env']->attach($app['handlerException']);
@@ -88,6 +83,11 @@ $app->addInstance('router', $router);
  * Résout les dépendances
  */
 $app->solvesDependencies($config['providers']);
+
+/**
+ * Ajout des services pour Twig
+ */
+$app->addToTwig();
 
 /**
  * Ajout de l'application au container

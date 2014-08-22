@@ -31,5 +31,8 @@
 	},
 	"Core\\Form\\FormBuilder":{
 		"aliasProvider":"formBuilder"
+	},
+	"Core\\Bracket\\Twig\\Route":{
+		"aliasProvider":"twig.route"
 	}
 }

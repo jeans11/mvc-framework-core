@@ -25,11 +25,10 @@ class Route
 	public function exec($routeName)
 	{
 		$object = $this->resolver->getInstanceController($routeName);
-		$return = call_user_func_array(array(
+		return call_user_func_array(array(
 			$object, 
 			$this->resolver->getMethodName()),
 			$this->resolver->getMethodParameters()
 		);
-		return $return;
 	}
 }
