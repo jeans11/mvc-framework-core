@@ -45,11 +45,12 @@ class ResolverController
 	 * Match la route et dispatch
 	 * certains attribut
 	 *
+	 * @param string $routeName
 	 * @return void
 	 */
-	public function getController()
+	public function getController($routeName = "")
 	{
-		$this->routeMatched = $this->matcher->match();	
+		$this->routeMatched = $this->matcher->match($routeName);	
 
 		if (class_exists($this->routeMatched->controller)) {
 			$this->class = $this->getReflectionClass($this->routeMatched->controller);
@@ -87,14 +88,15 @@ class ResolverController
 	/**
 	 * Retourne l'instance du controller
 	 * à invoké.
-	 *
+	 * 
+	 * @param string $routeName
 	 * @return mixed
 	 */
-	public function getInstanceController()
+	public function getInstanceController($routeName = "")
 	{
 		$args = array();
 
-		$this->getController();
+		$this->getController($routeName);
 		
 		if ($this->class->hasMethod('__construct')) {
 			$args = $this->getArgsConstructeur();

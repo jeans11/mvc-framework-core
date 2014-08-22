@@ -36,11 +36,12 @@ class RouteMatcher
 	 * Retourne la route qui correspond
 	 * à la requête
 	 *
+	 * @param string $routeName
 	 * @return Core\Routing\Route
 	 */
-	public function match()
+	public function match($routeName = "")
 	{
-		if ($route = $this->matchRoute()) {
+		if ($route = $this->matchRoute($routeName)) {
 			return $route;	
 		}
 
@@ -53,11 +54,17 @@ class RouteMatcher
 	 *
 	 * @return Core\Routing\Route
 	 */
-	private function matchRoute()
+	private function matchRoute($routeName)
 	{
+		$request = $this->request->uri();
+
+		if (!is_null($routeName)) {
+			$request = $routeName;			
+		}
+
 		foreach ($this->router as $route)	{
 			$route->decodeRoute();
-			if ($values = $route->match($this->request->uri()))	{
+			if ($values = $route->match($request))	{
 				if ($route->hasParams()) {
 					$route->setParamsValue(array_slice($values, 1));
 				}
