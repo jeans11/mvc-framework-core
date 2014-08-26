@@ -15,7 +15,7 @@ class UrlCreator
 	{
 		$host = $_SERVER['HTTP_HOST'];
 		$scriptName = $_SERVER['SCRIPT_NAME'];
-		$url = 'http://'.$host.preg_replace('/index.php/','',$scriptName).$uri;
+		$url = 'http://'.$host.preg_replace('/index.php\/?.*/','',$scriptName).$uri;
 		return $url;
 	}
 }
