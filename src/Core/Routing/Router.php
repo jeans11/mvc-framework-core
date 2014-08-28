@@ -81,7 +81,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $action
 	 * @return array
 	 */
-	private function listsRessources($label, $controller, $action)
+	private function listsRessource($label, $controller, $action)
 	{
 		return array(
 			'url' => $label,
@@ -100,7 +100,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $action
 	 * @return array
 	 */
-	private function addRessources($label, $controller, $action)
+	private function addRessource($label, $controller, $action)
 	{
 		return array(
 			'url' => $label,
@@ -119,7 +119,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $action
 	 * @return array
 	 */
-	private function showRessources($label, $controller, $action)
+	private function showRessource($label, $controller, $action)
 	{
 		return array(
 			'url' => $label.'/{id}',
@@ -141,7 +141,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $action
 	 * @return array
 	 */
-	private function updateRessources($label, $controller, $action)
+	private function updateRessource($label, $controller, $action)
 	{
 		return array(
 			'url' => $label.'/{id}',
@@ -163,7 +163,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $action
 	 * @return array
 	 */
-	private function deleteRessources($label, $controller, $action)
+	private function deleteRessource($label, $controller, $action)
 	{
 		return array(
 			'url' => $label.'/{id}',
