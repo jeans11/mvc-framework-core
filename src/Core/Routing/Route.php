@@ -66,9 +66,13 @@ class Route
 	 * @param string $url
 	 * @return mixed
 	 */
-	public function match($url)
+	public function match($url, $method = 'GET')
 	{
-		if (preg_match('`'.$this->url.'$`', $url, $matches)) {
+		if (!isset($this->method)) {
+			$this->method = 'GET';
+		}
+
+		if (preg_match('`'.$this->url.'$`', $url, $matches) && $method == $this->method) {
 			return $matches;	
 		} else {
 			return false;	

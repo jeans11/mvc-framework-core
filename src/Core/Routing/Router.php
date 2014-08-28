@@ -22,6 +22,14 @@ class Router implements ArrayAccess, Iterator, Countable
 	private $routes = array();
 
 	/**
+	 * Tableau des actions pour un 
+	 * controller de ressources
+	 *
+	 * @var array
+	 */
+	private $ressourceAction = array('lists', 'show', 'add', 'update', 'delete');
+
+	/**
 	 * Crée une instance du Router
 	 *
 	 * @param array $routes
@@ -41,8 +49,131 @@ class Router implements ArrayAccess, Iterator, Countable
 	 */
 	private function buildRoute($routes) {
 		foreach	($routes as $route) {
-			$this[] = new Route($route);
+			if (isset($route['options']) && $route['options'] == 'ressource') {
+				$this->buildRessourceRoute($route);
+			} else {
+				$this[] = new Route($route);
+			}
 		}
+	}
+
+	/**
+	 * Construit les routes nécessaire
+	 * pour un controller de ressource
+	 *
+	 * @param array $route
+	 * @return void
+	 */
+	private function buildRessourceRoute($route)
+	{
+		foreach ($this->ressourceAction as $action) {
+			$tabRoute = $this->{$action.'Ressource'}($route['url'], $route['controller'], $action);
+			$this[]	= new Route($tabRoute);
+		}
+	}
+
+	/**
+	 * Construit le tableau pour créer la route
+	 * listant les ressources
+	 *
+	 * @param string $label
+	 * @param string $controller
+	 * @param string $action
+	 * @return array
+	 */
+	private function listsRessources($label, $controller, $action)
+	{
+		return array(
+			'url' => $label,
+			'controller' => $controller,
+			'action' => $action, 
+			'method' => 'GET'
+		);
+	}
+
+	/**
+	 * Construit le tableau pour créer la route
+	 * ajoutant une ressource
+	 *
+	 * @param string $label
+	 * @param string $controller
+	 * @param string $action
+	 * @return array
+	 */
+	private function addRessources($label, $controller, $action)
+	{
+		return array(
+			'url' => $label,
+			'controller' => $controller,
+			'action' => $action, 
+			'method' => 'POST'
+		);
+	}
+
+	/**
+	 * Construit le tableau pour créer la route
+	 * affichant une ressource
+	 *
+	 * @param string $label
+	 * @param string $controller
+	 * @param string $action
+	 * @return array
+	 */
+	private function showRessources($label, $controller, $action)
+	{
+		return array(
+			'url' => $label.'/{id}',
+			'where' => array(
+				'id' => 'integer'
+			),
+			'controller' => $controller,
+			'action' => $action, 
+			'method' => 'GET'
+		);
+	}
+
+	/**
+	 * Construit le tableau pour créer la route
+	 * modifiant une ressource
+	 *
+	 * @param string $label
+	 * @param string $controller
+	 * @param string $action
+	 * @return array
+	 */
+	private function updateRessources($label, $controller, $action)
+	{
+		return array(
+			'url' => $label.'/{id}',
+		    'where' => array(
+				'id' => 'integer'
+			),
+			'controller' => $controller,
+			'action' => $action, 
+			'method' => 'PUT'
+		);
+	}
+
+	/**
+	 * Construit le tableau pour créer la route
+	 * supprimant une ressource
+	 *
+	 * @param string $label
+	 * @param string $controller
+	 * @param string $action
+	 * @return array
+	 */
+	private function deleteRessources($label, $controller, $action)
+	{
+		return array(
+			'url' => $label.'/{id}',
+			'where' => array(
+				'id' => 'integer'
+			),
+			'controller' => $controller,
+			'action' => $action, 
+			'method' => 'DELETE'
+		);
 	}
 
 	/**
