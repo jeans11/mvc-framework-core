@@ -11,15 +11,15 @@ abstract class Controller
 	/**
 	 * Met à jour une ressouce 
 	 */
-	abstract public function update();
+	abstract public function update($id);
 
 	/**
 	 * Supprime une ressource
 	 */
-	abstract public function delete();
+	abstract public function delete($id);
 
 	/**
 	 * Affiche une ressource
 	 */
-	abstract public function show();
+	abstract public function show($id);
 }
