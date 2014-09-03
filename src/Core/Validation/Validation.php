@@ -1,6 +1,8 @@
 <?php
 namespace Core\Validation;
 
+use Core\Validation\ValidationInterface;
+
 class Validation
 {
 	private $errors = array();

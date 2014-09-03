@@ -1,7 +1,7 @@
 <?php
 namespace Core\Validation\Validateur;
 
-class ValidateString implements InterfaceValidateur
+class ValidateString implements ValidateurInterface
 {
 	public static function isValid($value)
 	{
