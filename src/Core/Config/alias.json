@@ -34,5 +34,8 @@
 	},
 	"Core\\Bracket\\Twig\\Route":{
 		"aliasProvider":"twig.route"
+	},
+	"Core\\Validation\\Validation":{
+		"aliasProvider":"validation"
 	}
 }

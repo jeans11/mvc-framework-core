@@ -3,5 +3,9 @@ namespace Core\Validation\Validateur;
 
 interface ValidateurInterface
 {
-	public function isValid($value);
+	/**
+	 * Vérifie la valeur suivant la règle
+	 * utilisé
+	 */
+	public static function isValid($value);
 }

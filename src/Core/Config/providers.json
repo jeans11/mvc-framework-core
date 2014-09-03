@@ -4,5 +4,6 @@
 	"resolveController":"routeMatcher",
 	"form":null,
 	"formBuilder":"form",
-	"twig.route":"resolveController"
+	"twig.route":"resolveController",
+	"validation":null
 }
