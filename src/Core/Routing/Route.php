@@ -68,7 +68,7 @@ class Route
 	 */
 	public function match($url, $method = 'GET')
 	{
-		if (!isset($this->method)) {
+		if (!$this->method) {
 			$this->method = 'GET';
 		}
 
