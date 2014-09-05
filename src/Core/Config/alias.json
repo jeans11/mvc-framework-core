@@ -26,12 +26,6 @@
 	"Core\\View\\View":{
 		"aliasProvider":"view"
 	},
-	"PFBC\\Form":{
-		"aliasProvider":"form"
-	},
-	"Core\\Form\\FormBuilder":{
-		"aliasProvider":"formBuilder"
-	},
 	"Core\\Bracket\\Twig\\Route":{
 		"aliasProvider":"twig.route"
 	},

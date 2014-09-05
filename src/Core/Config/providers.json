@@ -2,8 +2,6 @@
 	"httpRequest":null,
 	"routeMatcher":["router","httpRequest"],
 	"resolveController":"routeMatcher",
-	"form":null,
-	"formBuilder":"form",
 	"twig.route":"resolveController",
 	"validation":null
 }
