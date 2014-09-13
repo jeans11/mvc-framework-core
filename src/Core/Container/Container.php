@@ -113,6 +113,10 @@ class Container implements ArrayAccess
 			$param = $this->contains[$key];
 		}
 
+		if (preg_match('/config\.([a-z]*)/', $key, $matches)) {
+			$param = $this['config'][$matches[1]];
+		}
+
 		return $param;
 	}
 
