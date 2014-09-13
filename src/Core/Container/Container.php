@@ -107,9 +107,13 @@ class Container implements ArrayAccess
 	 * @return mixed
 	 */
 	private function getParam($key) {
-		if (array_key_exists($key, $this->contains))	{
-			return $this->contains[$key];
+		$param = $key;
+
+		if (array_key_exists($key, $this->contains)) {
+			$param = $this->contains[$key];
 		}
+
+		return $param;
 	}
 
 	private function getClassName($key)
