@@ -4,6 +4,7 @@ namespace Core\Controller;
 use Core\Routing\RouteMatcher;
 use ReflectionClass;
 use ReflectionMethod;
+use Core\Facades\ApplicationFacade as App;
 
 class ResolverController
 { 
@@ -155,9 +156,20 @@ class ResolverController
 			return $args;
 		}
 		
+		// Parcour des  paramètre		
 		foreach ($constructeur->getParameters() as $param) {
 			$class = $param->getClass();
-			$args[] = $class->newInstanceArgs($this->getArgsConstructeur($class));
+
+			// Le paramètre est connue par le container de
+			// dépendance, on l'instancie
+			if ($alias = App::getAliasProvider($class->name)) {
+				$args[]	= App::get($alias[0]);
+
+			// Le paramètre ne figure pas dans le container
+			// on l'instancie via le réflection
+			} else {
+				$args[] = $class->newInstanceArgs($this->getArgsConstructeur($class));
+			}
 		}
 
 		return $args;

@@ -107,19 +107,29 @@ class Container implements ArrayAccess
 	 * @return mixed
 	 */
 	private function getParam($key) {
+		// Le paramètre est une simple chaîne
 		$param = $key;
 
+		// Le paramètre est un objet 
 		if (array_key_exists($key, $this->contains)) {
 			$param = $this->contains[$key];
 		}
 
-		if (preg_match('/config\.([a-z]*)/', $key, $matches)) {
-			$param = $this['config'][$matches[1]];
+		// Le paramètre est un paramètre de la configuration
+		if (preg_match('/config\.([a-zA-Z]*)\.([a-zA-Z]*)/', $key, $matches)) {
+			$param = $this['config'][$matches[1]][$matches[2]];
 		}
 
 		return $param;
 	}
 
+	/**
+	 * Retourne le nom de la classe suivant
+	 * la clé
+	 *
+	 * @param string $key
+	 * @return mixed
+	 */
 	private function getClassName($key)
 	{
 		if (isset($this->classNames[$key])) {
@@ -127,6 +137,18 @@ class Container implements ArrayAccess
 		}
 
 		throw new ContainerException(sprintf(ContainerException::CLASS_NAME, $key));
+	}
+
+	/**
+	 * Retourne l'alias du provider
+	 * suivant le nom de la classe
+	 *
+	 * @param  string $className
+	 * @return array
+	 */
+	public function getAliasProvider($className)
+	{
+		return array_keys($this->classNames, $className);
 	}
 
 	/**
