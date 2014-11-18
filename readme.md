@@ -1,4 +1,4 @@
-# Mini Framework PHP
+# MVCFramework (Core) 
 
 Ce petit framework a été développé en fin de Master 1 pour faire suite au cours
 reçu. Il utilise notamment un container de dépendance ainsi que certains
