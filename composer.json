@@ -1,7 +1,7 @@
 {
-    "name": "petty/framework",
-    "description": "This is petty",
-    "keywords": ["framework", "petty"],
+    "name": "jeans11/mvc-framework-core",
+    "description": "MVC Framework Core",
+    "keywords": ["framework", "mvc"],
     "license": "MIT",
     "authors": [
         {
