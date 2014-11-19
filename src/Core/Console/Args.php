@@ -16,6 +16,6 @@ class Args
 
 	public function getArgv()
 	{
-		return $_SERVER['argv'];
+		return array_key_exists('argv',$_SERVER) ? $_SERVER['argv'] : array();
 	}
 }
