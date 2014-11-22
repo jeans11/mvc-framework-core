@@ -10,6 +10,6 @@ class RegExDefault
 	 */
 	public function __toString()
 	{
-		return '[a-zA-Z0-9]*';
+		return '[a-zA-Z0-9_]*';
 	}
 }
