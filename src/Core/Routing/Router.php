@@ -68,7 +68,8 @@ class Router implements ArrayAccess, Iterator, Countable
 	{
 		if (!isset($route['options']['where'])) {
 			$where = array(
-				'id'=>'integer'
+				'param'=>'id',
+				'type'=>'integer'
 			);
 		} else {
 			$where = $route['options']['where'];
@@ -133,8 +134,10 @@ class Router implements ArrayAccess, Iterator, Countable
 	private function showRessource($label, $controller, $action, $where)
 	{
 		return array(
-			'url' => $label.'/{id}',
-			'where' => $where,
+			'url' => $label.'/{'.$where['param'].'}',
+			'where' => array(
+				$where['param'] => $where['type']
+			),
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'GET'
@@ -154,8 +157,10 @@ class Router implements ArrayAccess, Iterator, Countable
 	private function updateRessource($label, $controller, $action, $where)
 	{
 		return array(
-			'url' => $label.'/{id}',
-			'where' => $where,
+			'url' => $label.'/{'.$where['param'].'}',
+			'where' => array(
+				$where['param'] => $where['type']
+			),
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'PUT'
@@ -175,8 +180,10 @@ class Router implements ArrayAccess, Iterator, Countable
 	private function deleteRessource($label, $controller, $action, $where)
 	{
 		return array(
-			'url' => $label.'/{id}',
-			'where' => $where,
+			'url' => $label.'/{'.$where['param'].'}',
+			'where' => array(
+				$where['param'] => $where['type']
+			),
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'DELETE'
