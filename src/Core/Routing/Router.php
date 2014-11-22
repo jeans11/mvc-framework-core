@@ -49,7 +49,7 @@ class Router implements ArrayAccess, Iterator, Countable
 	 */
 	private function buildRoute($routes) {
 		foreach	($routes as $route) {
-			if (isset($route['options']) && $route['options'] == 'ressource') {
+			if (isset($route['options']) && $route['options']['ressource'] == 'yes') {
 				$this->buildRessourceRoute($route);
 			} else {
 				$this[] = new Route($route);
@@ -66,8 +66,16 @@ class Router implements ArrayAccess, Iterator, Countable
 	 */
 	private function buildRessourceRoute($route)
 	{
+		if (!isset($route['options']['where'])) {
+			$where = array(
+				'id'=>'integer'
+			);
+		} else {
+			$where = $route['options']['where'];
+		}
+
 		foreach ($this->ressourceAction as $action) {
-			$tabRoute = $this->{$action.'Ressource'}($route['url'], $route['controller'], $action);
+			$tabRoute = $this->{$action.'Ressource'}($route['url'], $route['controller'], $action, $where);
 			$this[]	= new Route($tabRoute);
 		}
 	}
@@ -79,9 +87,10 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $label
 	 * @param string $controller
 	 * @param string $action
+	 * @param array  $where
 	 * @return array
 	 */
-	private function listsRessource($label, $controller, $action)
+	private function listsRessource($label, $controller, $action, $where = null)
 	{
 		return array(
 			'url' => $label,
@@ -98,9 +107,10 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $label
 	 * @param string $controller
 	 * @param string $action
+	 * @param array  $where
 	 * @return array
 	 */
-	private function addRessource($label, $controller, $action)
+	private function addRessource($label, $controller, $action, $where = null)
 	{
 		return array(
 			'url' => $label,
@@ -117,15 +127,14 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $label
 	 * @param string $controller
 	 * @param string $action
+	 * @param array  $where
 	 * @return array
 	 */
-	private function showRessource($label, $controller, $action)
+	private function showRessource($label, $controller, $action, $where)
 	{
 		return array(
 			'url' => $label.'/{id}',
-			'where' => array(
-				'id' => 'integer'
-			),
+			'where' => $where,
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'GET'
@@ -139,15 +148,14 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $label
 	 * @param string $controller
 	 * @param string $action
+	 * @param array  $where
 	 * @return array
 	 */
-	private function updateRessource($label, $controller, $action)
+	private function updateRessource($label, $controller, $action, $where)
 	{
 		return array(
 			'url' => $label.'/{id}',
-		    'where' => array(
-				'id' => 'integer'
-			),
+			'where' => $where,
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'PUT'
@@ -161,15 +169,14 @@ class Router implements ArrayAccess, Iterator, Countable
 	 * @param string $label
 	 * @param string $controller
 	 * @param string $action
+	 * @param array  $where
 	 * @return array
 	 */
-	private function deleteRessource($label, $controller, $action)
+	private function deleteRessource($label, $controller, $action, $where)
 	{
 		return array(
 			'url' => $label.'/{id}',
-			'where' => array(
-				'id' => 'integer'
-			),
+			'where' => $where,
 			'controller' => $controller,
 			'action' => $action, 
 			'method' => 'DELETE'
