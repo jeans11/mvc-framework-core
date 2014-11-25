@@ -2,6 +2,7 @@
 
 use Core\Http\HttpRequest;
 use Core\Http\HttpResponse;
+use Core\Http\Redirection;
 use Core\Config\Config;
 use Core\Exception\HandlerException;
 use \Twig_Loader_Filesystem;
@@ -27,5 +28,6 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('appConsole', new AppConsole())
 	->addInstance('args', new Args())
 	->addInstance('env', new Environment())
-	->addInstance('twig.url', new UrlCreator());
+	->addInstance('twig.url', new UrlCreator())
+	->addInstance('redirection', new Redirection($app['request']));
 

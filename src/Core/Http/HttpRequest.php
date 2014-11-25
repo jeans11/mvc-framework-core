@@ -72,6 +72,16 @@ class HttpRequest
 	}
 
 	/**
+	 * Retourne le script de lancement
+	 *
+	 * @return string
+	 */
+	public function phpSelf()
+	{
+		return $_SERVER['PHP_SELF'];
+	}
+
+	/**
 	 * Ajoute des donnée
 	 * à la variable $_GET
 	 *
