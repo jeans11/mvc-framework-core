@@ -12,9 +12,6 @@ use Core\Console\AppConsole;
 use Core\Console\Args;
 use Core\Config\Environment;
 use Core\Bracket\Twig\UrlCreator;
-use \Upload\Storage\FileSystem;
-use \Upload\File;
-use Core\Validation\Upload\UploadManager;
 
 $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('request', new HttpRequest())
@@ -32,8 +29,5 @@ $app->addInstance('config', new Config($app['path.config'], $app['path.psr0']))
 	->addInstance('args', new Args())
 	->addInstance('env', new Environment())
 	->addInstance('twig.url', new UrlCreator())
-	->addInstance('redirection', new Redirection($app['request']))
-	->addInstance('uploadFileSystem', new FileSystem($app['config']['upload']['directory']))
-	->addInstance('uploadFile', new File($app['config']['upload']['inputFileName'], $app['uploadFileSystem']))
-	->addInstance('uploadManager', new UploadManager($app['uploadFile'], $app['config']['upload']['accepts']));
+	->addInstance('redirection', new Redirection($app['request']));
 
