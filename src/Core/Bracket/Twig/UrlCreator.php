@@ -15,7 +15,15 @@ class UrlCreator
 	{
 		$host          = $_SERVER['HTTP_HOST'];
 		$scriptName    = $_SERVER['SCRIPT_NAME'];
-		$requestScheme = $_SERVER['REQUEST_SCHEME'];
+
+		if (isset($_SERVER['HTTPS'])) {
+			if ($_SERVER['HTTPS'] == 'on') {
+				$requestScheme = 'https';
+			}
+		} else {
+			$requestScheme = 'http';
+		}
+
 		$url           = $requestScheme.'://'.$host.preg_replace('/index.php\/?.*/','',$scriptName).$uri;
 		return $url;
 	}
