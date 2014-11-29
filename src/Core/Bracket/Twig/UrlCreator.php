@@ -13,9 +13,10 @@ class UrlCreator
 	 */
 	public function create($uri)
 	{
-		$host = $_SERVER['HTTP_HOST'];
-		$scriptName = $_SERVER['SCRIPT_NAME'];
-		$url = 'http://'.$host.preg_replace('/index.php\/?.*/','',$scriptName).$uri;
+		$host          = $_SERVER['HTTP_HOST'];
+		$scriptName    = $_SERVER['SCRIPT_NAME'];
+		$requestScheme = $_SERVER['REQUEST_SCHEME'];
+		$url           = $requestScheme.'://'.$host.preg_replace('/index.php\/?.*/','',$scriptName).$uri;
 		return $url;
 	}
 }
