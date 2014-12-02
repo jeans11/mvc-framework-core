@@ -84,6 +84,9 @@ class Container implements ArrayAccess
 						case 3:
 							return new $className($param[0], $param[1], $param[2]);
 							break;
+						case 4:
+							return new $className($param[0], $param[1], $param[2],$param[3]);
+							break;
 					}
 					break;
 			}
